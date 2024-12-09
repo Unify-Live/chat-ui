@@ -1,0 +1,78 @@
+<template>
+  <div class="chat-input">
+    <button @click="openAttachments" class="attachments-button">
+      <n-icon>
+        <DocumentAttachOutline />
+      </n-icon>
+    </button>
+    <input
+      v-model="message_text"
+      type="text"
+      placeholder="Type a message..."
+      class="message-input"
+    />
+    <button @click="openEmojiPicker" class="emoji-button">
+      <n-icon>
+        <HappyOutline />
+      </n-icon>
+    </button>
+    <button @click="sendMessage" class="send-button">
+      <n-icon>
+        <SendOutline />
+      </n-icon>
+    </button>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import { useMessage } from "naive-ui";
+import {
+  DocumentAttachOutline,
+  SendOutline,
+  HappyOutline,
+} from "@vicons/ionicons5";
+const message = useMessage();
+const message_text = ref("");
+
+async function sendMessage() {
+  if (message_text.value.trim() !== "") {
+    message.success("Message sent:");
+  }
+}
+async function openAttachments() {
+  message.success("Attachments button clicked. Not yet implemented.");
+}
+async function openEmojiPicker() {
+  message.success("Emoji picker button clicked. Not yet implemented.");
+}
+</script>
+
+<style scoped>
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: rgb(24, 24, 28);
+}
+
+.attachments-button,
+.emoji-button,
+.send-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 5px;
+  color: aquamarine;
+}
+
+.message-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+</style>

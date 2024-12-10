@@ -25,6 +25,12 @@ export default defineConfig({
       resolvers: [NaiveUiResolver()],
     }),
   ],
+  server: {
+    port: 8080,
+    watch: {
+        usePolling: true,
+    },
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),

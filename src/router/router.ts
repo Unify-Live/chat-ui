@@ -4,6 +4,8 @@ import ProjectsView from "../views/ProjectsView.vue";
 import Profile from "../views/Profile.vue";
 import ProjectView from "../views/ProjectView.vue";
 import ManagersView from "../views/ManagersView.vue";
+import AuthCallbackView from "../views/AuthCallbackView.vue";
+import type { RouteLocationNormalized } from "vue-router";
 
 const routes = [
   {
@@ -35,6 +37,13 @@ const routes = [
     name: "project",
     component: ProjectView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/authentik_callback",
+    name: "authCallback",
+    component: AuthCallbackView,
+    meta: { requiresAuth: false },
+    props: (route: RouteLocationNormalized) => ({ code: route.query.code }),
   },
 ];
 

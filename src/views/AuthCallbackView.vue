@@ -20,7 +20,7 @@ const route = useRoute();
 const exchangeCodeForTokens = async (code) => {
 try {
     const response = await fetch(
-    "https://localhost:5000/exchange-code-for-token/",
+    "http://localhost:5000/exchange-code-for-token/",
     {
         method: "POST",
         headers: {

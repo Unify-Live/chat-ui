@@ -12,10 +12,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
 
 const isLoading = ref(true);
 const error = ref(null);
 const route = useRoute();
+const router = useRouter();
+const userStore = useUserStore();
 
 const exchangeCodeForTokens = async (code) => {
 try {
@@ -31,10 +35,14 @@ try {
     );
 
     if (!response.ok) {
-    throw new Error("Token exchange failed");
+        throw new Error("Token exchange failed");
+    } else {
+        const json_data = await response.json();
+        userStore.setUserFromToken(json_data['access_token'])
+        localStorage.setItem("userToken", json_data['access_token']);
+        return
     }
-
-    return await response.json();
+    
 } catch (err) {
     console.error("Token exchange error:", err);
     throw err;
@@ -59,6 +67,8 @@ try {
 
     // Perform any necessary actions with the tokens here
     isLoading.value = false;
+
+    // router.push("/")
 } catch (err) {
     error.value = err.message;
     isLoading.value = false;

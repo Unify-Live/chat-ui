@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginView from "../views/LoginView.vue";
 import ProjectsView from "../views/ProjectsView.vue";
 import Profile from "../views/Profile.vue";
 import ProjectView from "../views/ProjectView.vue";
@@ -8,12 +7,6 @@ import AuthCallbackView from "../views/AuthCallbackView.vue";
 import type { RouteLocationNormalized } from "vue-router";
 
 const routes = [
-  {
-    path: "/login",
-    name: "login",
-    component: LoginView,
-    meta: { requiresAuth: false },
-  },
   {
     path: "/",
     name: "projects",
@@ -52,17 +45,18 @@ const router = createRouter({
   routes,
 });
 
-// Basic navigation guard
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = localStorage.getItem('user')
 
-//   if (to.meta.requiresAuth && !isAuthenticated) {
-//     next('/login')
-//   } else if (to.path === '/login' && isAuthenticated) {
-//     next('/')
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('user')
+  console.log(isAuthenticated);
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    window.location.href = 'http://localhost:9000/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile'
+    next(false);
+  } else if (to.path === 'http://localhost:9000/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile' && isAuthenticated) {
+    next('/')
+  } else {
+    next()
+  }
+})
 
 export default router;

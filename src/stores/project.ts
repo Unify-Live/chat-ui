@@ -10,6 +10,8 @@ OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
 
 export const useProjectsStore = defineStore("projectsStore", () => {
   const projectList = ref<ProjectResponse[]>([]);
+  const newProjectName = ref("");
+  const newProjectDescription = ref("");
 
   function fetchMyProjects() {
     try {
@@ -24,12 +26,14 @@ export const useProjectsStore = defineStore("projectsStore", () => {
     }
   }
 
-  function newProject(name: string, description: string) {
+  function newProject() {
     try {
       ProjectsService.createProjectProjectsPost({
-        name: name,
-        description: description,
+        name: newProjectName.value,
+        description: newProjectDescription.value,
       }).then(() => {
+        newProjectName.value = "";
+        newProjectDescription.value = "";
         fetchMyProjects();
       });
     } catch (error) {
@@ -41,5 +45,7 @@ export const useProjectsStore = defineStore("projectsStore", () => {
     projectList,
     fetchMyProjects,
     newProject,
+    newProjectName,
+    newProjectDescription,
   };
 });

@@ -12,7 +12,7 @@
     <n-data-table
       v-if="!isMobile"
       :columns="columns"
-      :data="projectList"
+      :data="projectStore.projectList"
       :loading="isLoading"
       :scroll-x="1000"
       table-layout="fixed"
@@ -32,44 +32,18 @@
     <!-- Mobile View -->
     <div v-else class="cards-container">
       <n-card
-        v-for="project in projectList"
-        :key="project.id"
-        :class="{ 'card-with-messages': project.newMessages > 0 }"
+        v-for="project in projectStore.projectList"
+        :key="project.uuid"
         class="project-card"
       >
         <!-- Card Header with Project Name and New Messages Badge -->
         <template #header>
           <div class="card-header">
-            <router-link :to="`/project/${project.id}`" class="project-link">
+            <router-link :to="`/project/${project.uuid}`" class="project-link">
               {{ project.name }}
             </router-link>
-            <n-badge
-              v-if="project.newMessages > 0"
-              :value="project.newMessages"
-              type="success"
-              :max="99"
-            >
-              <n-button text>
-                <template #icon>
-                  <n-icon><ChatbubbleEllipses /></n-icon>
-                </template>
-              </n-button>
-            </n-badge>
           </div>
         </template>
-
-        <!-- Card Content with Project Details -->
-        <n-descriptions :column="1" class="card-content">
-          <n-descriptions-item label="Всього діалогів">
-            {{ project.totalDialogs }}
-          </n-descriptions-item>
-          <n-descriptions-item label="Активні інтеграції">
-            {{ project.activeIntegrations }} / {{ project.integrations }}
-          </n-descriptions-item>
-          <n-descriptions-item label="Останній активний">
-            {{ project.lastActive.toLocaleString() }}
-          </n-descriptions-item>
-        </n-descriptions>
 
         <!-- Card Footer with Actions -->
         <template #footer>
@@ -82,7 +56,7 @@
       <!-- Mobile Pagination -->
       <n-pagination
         v-model:page="currentPage"
-        :page-count="Math.ceil(projectList.length / tablePageSize)"
+        :page-count="Math.ceil(projectStore.projectList.length / tablePageSize)"
         :page-size="tablePageSize"
         show-size-picker
         :page-sizes="[10, 25]"
@@ -95,14 +69,15 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, h } from "vue";
-import { projectList } from "@/stores/project";
+import { useProjectsStore } from "@/stores/project";
+import { ProjectResponse } from "../client/backend/models/ProjectResponse";
 import { DataTableColumns } from "naive-ui";
-import type { Project } from "@/types";
 import ProjectActions from "@/components/project/ProjectActions.vue";
 import { useMessage } from "naive-ui";
-import { Add, ChatbubbleEllipses } from "@vicons/ionicons5";
+import { Add } from "@vicons/ionicons5";
 import { RouterLink } from "vue-router";
 
+const projectStore = useProjectsStore();
 const message = useMessage();
 const isLoading = ref(false);
 const tablePageSize = ref(25);
@@ -116,6 +91,7 @@ const checkMobile = () => {
 
 // Setup mobile detection
 onMounted(() => {
+  projectStore.fetchMyProjects();
   checkMobile();
   window.addEventListener("resize", checkMobile);
 });
@@ -128,17 +104,17 @@ async function createNewProject() {
   message.success(`Not yet implemented`);
 }
 
-const columns: DataTableColumns<Project> = [
+const columns: DataTableColumns<ProjectResponse> = [
   {
     key: "name",
     title: "Ім'я",
     align: "center",
     sorter: "default",
-    render: (row: Project) => {
+    render: (row: ProjectResponse) => {
       return h(
         RouterLink,
         {
-          to: `/project/${row.id}`,
+          to: `/project/${row.uuid}`,
           title: "Go Project details",
           id: "ProjectId",
           style: {
@@ -157,18 +133,11 @@ const columns: DataTableColumns<Project> = [
     sorter: "default",
   },
   {
-    key: "lastActive",
-    title: "Останній активний",
-    align: "center",
-    sorter: "default",
-    render: (row: Project) => row.lastActive.toLocaleTimeString(),
-  },
-  {
     key: "actions",
     title: "Дії",
     align: "center",
     className: "flex justify-center",
-    render: (row: Project) => h(ProjectActions, { project: row }),
+    render: (row: ProjectResponse) => h(ProjectActions, { project: row }),
   },
 ];
 

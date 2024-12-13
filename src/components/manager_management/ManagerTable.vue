@@ -1,7 +1,7 @@
 <template>
   <div class="main" id="main">
     <n-space justify="space-between" align="center" class="header-space">
-      <h1>Менеджери проекту {{ projectList[props.projectId].name }}</h1>
+      <h1>Менеджери проекту</h1>
       <n-button @click="openInviteManagerModal" type="primary">
         <n-icon><Add /></n-icon>
         Запросити менеджера
@@ -78,7 +78,7 @@
     <n-modal v-model:show="inviteManagerModal">
       <n-card
         class="invite-modal"
-        :title="`Запросити менеджера ${projectList[props.projectId].name}`"
+        :title="`Запросити менеджера`"
         :bordered="false"
         size="huge"
         role="dialog"
@@ -114,7 +114,7 @@
 
 <script setup lang="ts">
 import { ref, h, Ref, onMounted, onUnmounted } from "vue";
-import { projectList } from "@/stores/project";
+// import { projectList } from "@/stores/project";
 import { DataTableColumns, NButton } from "naive-ui";
 import { managersList } from "@/stores/manager";
 import type { Manager } from "@/types";
@@ -159,10 +159,6 @@ async function handleInviteManager() {
 async function cancelInvitingManager() {
   inviteManagerModal.value = false;
 }
-
-const props = defineProps<{
-  projectId: number;
-}>();
 
 const isLoading = ref(false);
 const tablePageSize = ref(25);

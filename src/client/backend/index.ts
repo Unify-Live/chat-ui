@@ -15,11 +15,8 @@ export type { HTTPValidationError } from "./models/HTTPValidationError";
 export type { ProjectCreate } from "./models/ProjectCreate";
 export type { ProjectResponse } from "./models/ProjectResponse";
 export type { TokenResponse } from "./models/TokenResponse";
-export type { UserCreate } from "./models/UserCreate";
-export type { UserResponse } from "./models/UserResponse";
 export type { ValidationError } from "./models/ValidationError";
 
 export { AuthService } from "./services/AuthService";
 export { ProjectsService } from "./services/ProjectsService";
 export { StatusService } from "./services/StatusService";
-export { UsersService } from "./services/UsersService";

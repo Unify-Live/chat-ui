@@ -7,7 +7,7 @@
       style="display: flex; flex-direction: row"
     >
       <router-link
-        :to="`/project/${project.id}/integrations`"
+        :to="`/project/${project.uuid}/integrations`"
         class="no-underline text-inherit"
       >
         <n-tooltip trigger="hover" placement="bottom">
@@ -21,7 +21,7 @@
       </router-link>
 
       <router-link
-        :to="`/project/${project.id}/managers`"
+        :to="`/project/${project.uuid}/managers`"
         class="no-underline text-inherit"
       >
         <n-tooltip trigger="hover" placement="bottom">
@@ -35,7 +35,7 @@
       </router-link>
 
       <router-link
-        :to="`/project/${project.id}/settings`"
+        :to="`/project/${project.uuid}/settings`"
         class="no-underline text-inherit"
       >
         <n-tooltip trigger="hover" placement="bottom">
@@ -87,9 +87,9 @@ import {
   Cog,
   InformationCircleOutline,
 } from "@vicons/ionicons5";
-import type { Project } from "@/types";
+import type { ProjectResponse } from "../../client/backend/models/ProjectResponse";
 
 defineProps<{
-  project: Project;
+  project: ProjectResponse;
 }>();
 </script>

@@ -16,20 +16,6 @@ export interface Manager {
   createdAt: Date;
 }
 
-export interface Project {
-  id: number;
-  name: string;
-  newMessages: number;
-  totalDialogs: number;
-  integrations: number;
-  ownerId: string;
-  members: string[];
-  createdAt: Date;
-  lastActive: Date;
-  activeIntegrations: number;
-  avatar?: string;
-}
-
 export interface Dialog {
   id?: string;
   projectId?: number;

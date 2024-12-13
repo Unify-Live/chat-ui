@@ -1,29 +1,45 @@
 // src/stores/project.ts
-import type { Project } from "../types";
+import { ProjectsService, OpenAPI } from "../client/backend";
+import { getBackendUrl } from "../appConfig";
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import { ProjectResponse } from "../client/backend/models/ProjectResponse";
 
-export const projectList: Project[] = [
-  {
-    id: 1,
-    name: "Game Shop",
-    newMessages: 5,
-    totalDialogs: 120,
-    integrations: 2,
-    ownerId: "1",
-    members: ["1"],
-    createdAt: new Date(),
-    lastActive: new Date(),
-    activeIntegrations: 2,
-  },
-  {
-    id: 2,
-    name: "Key Store",
-    newMessages: 2,
-    totalDialogs: 45,
-    integrations: 1,
-    ownerId: "1",
-    members: ["1"],
-    createdAt: new Date(),
-    lastActive: new Date(),
-    activeIntegrations: 2,
-  },
-];
+OpenAPI.BASE = getBackendUrl();
+OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
+
+export const useProjectsStore = defineStore("projectsStore", () => {
+  const projectList = ref<ProjectResponse[]>([]);
+
+  function fetchMyProjects() {
+    try {
+      ProjectsService.getProjectsProjectsGet().then(
+        (projects: ProjectResponse[]) => {
+          console.log(projects);
+          projectList.value = projects;
+        },
+      );
+    } catch (error) {
+      console.error("Getting projects list:", error);
+    }
+  }
+
+  function newProject(name: string, description: string) {
+    try {
+      ProjectsService.createProjectProjectsPost({
+        name: name,
+        description: description,
+      }).then(() => {
+        fetchMyProjects();
+      });
+    } catch (error) {
+      console.error("Creating new project:", error);
+    }
+  }
+
+  return {
+    projectList,
+    fetchMyProjects,
+    newProject,
+  };
+});

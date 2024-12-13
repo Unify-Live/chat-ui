@@ -109,6 +109,8 @@ import { useRouter } from "vue-router";
 import { NavigationItem } from "@/components/common/NavigationBar.vue";
 
 const userStore = useUserStore();
+userStore.setUserFromToken(localStorage.getItem("userToken")!);
+
 const navigationItems: NavigationItem[] = [
   {
     label: "Проекти",
@@ -139,7 +141,7 @@ const userDropdownOptions: DropdownOption[] = [
 async function onUserDropdownSelect(key: string) {
   if (key === "logout") {
     await userStore.logout();
-    await router.push({ name: "login" });
+    await router.push({ name: "projects" });
   }
 }
 </script>

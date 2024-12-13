@@ -45,18 +45,46 @@ const router = createRouter({
   routes,
 });
 
-
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('user')
-  console.log(isAuthenticated);
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    window.location.href = 'http://localhost:9000/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile'
-    next(false);
-  } else if (to.path === 'http://localhost:9000/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile' && isAuthenticated) {
-    next('/')
+function return_auth_url() {
+  if (window.location.href.includes("localhost")) {
+    return "http://localhost:9000/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile%20offline_access&prompt=consent";
   } else {
-    next()
+    return "https://dev-auth.unify-live.com/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=https://unify-live.com/authentik_callback&response_type=code&scope=openid%20email%20profile%20offline_access&prompt=consent";
   }
-})
+}
+
+router.beforeEach((to, _, next) => {
+  const isTokenExpiredResult = isTokenExpired(
+    localStorage.getItem("userToken"),
+  );
+  if (to.path.startsWith("/authentik_callback")) {
+    next();
+    return;
+  }
+  if (!isTokenExpiredResult) {
+    next();
+    return;
+  }
+  if (to.meta.requiresAuth && isTokenExpiredResult) {
+    window.location.href = return_auth_url();
+    next(false);
+  }
+});
+
+function isTokenExpired(token: string | null): boolean {
+  console.log(token);
+  if (!token) return true;
+  if (token === null) return true;
+
+  try {
+    const payloadBase64 = token.split(".")[1];
+    if (!payloadBase64) return true;
+    const payload = JSON.parse(atob(payloadBase64));
+    const now = Math.floor(Date.now() / 1000);
+    return payload.exp && payload.exp < now;
+  } catch (e) {
+    return true;
+  }
+}
 
 export default router;

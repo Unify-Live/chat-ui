@@ -1,12 +1,12 @@
 <template>
-<div class="auth-callback">
+  <div class="auth-callback">
     <div v-if="isLoading" class="loading">
-    <p>Authenticating... Please wait</p>
+      <p>Authenticating... Please wait</p>
     </div>
     <div v-if="error" class="error">
-    <p>{{ error }}</p>
+      <p>{{ error }}</p>
     </div>
-</div>
+  </div>
 </template>
 
 <script setup>
@@ -21,41 +21,47 @@ const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 
+function return_auth_url() {
+  if (window.location.href.includes("localhost")) {
+    return "http://localhost:5000/exchange-code-for-token/";
+  } else {
+    return "https://dev-backend-api.unify-live.com/exchange-code-for-token/";
+  }
+}
+
 const exchangeCodeForTokens = async (code) => {
-try {
-    const response = await fetch(
-    "http://localhost:5000/exchange-code-for-token/",
-    {
-        method: "POST",
-        headers: {
+  try {
+    const response = await fetch(return_auth_url(), {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code }),
-    }
-    );
+      },
+      body: JSON.stringify({ code }),
+    });
 
     if (!response.ok) {
-        throw new Error("Token exchange failed");
+      throw new Error("Token exchange failed");
     } else {
-        const json_data = await response.json();
-        userStore.setUserFromToken(json_data['access_token'])
-        localStorage.setItem("userToken", json_data['access_token']);
-        return
+      const json_data = await response.json();
+      userStore.setUserFromToken(json_data["access_token"]);
+      localStorage.setItem("userToken", json_data["access_token"]);
+      localStorage.setItem("refreshToken", json_data["refresh_token"]);
+      router.push("/");
+      return json_data;
     }
-    
-} catch (err) {
+  } catch (err) {
     console.error("Token exchange error:", err);
     throw err;
-}
+  }
 };
 
 const handleAuthentication = async () => {
-try {
+  try {
     // Extract the authorization code from the query parameters
     const code = route.query.code;
 
     if (!code) {
-    throw new Error("No authorization code found");
+      throw new Error("No authorization code found");
     }
 
     console.log("Authorization code:", code);
@@ -69,33 +75,32 @@ try {
     isLoading.value = false;
 
     // router.push("/")
-} catch (err) {
+  } catch (err) {
     error.value = err.message;
     isLoading.value = false;
-}
+  }
 };
 
 onMounted(() => {
-handleAuthentication();
+  handleAuthentication();
 });
 </script>
 
 <style scoped>
 .auth-callback {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
 
 .loading,
 .error {
-font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .error {
-color: red;
+  color: red;
 }
 </style>
-  

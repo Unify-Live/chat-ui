@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getCurrentInstance, onMounted, Ref, ref } from "vue";
+import { Ref, ref } from "vue";
 import { jwtDecode } from "jwt-decode";
 
 export interface UserData {
@@ -30,14 +30,14 @@ export const useUserStore = defineStore("user", () => {
   function setUserFromToken(token: string) {
     try {
       const decodedToken = jwtDecode<JwtPayload>(token);
-      
+
       user.value = {
         loggedIn: true,
         username: decodedToken.preferred_username || decodedToken.name,
         email: decodedToken.email,
         roles: decodedToken.groups,
         token: token,
-        uid: decodedToken.uid
+        uid: decodedToken.uid,
       };
 
       // Store token in local storage
@@ -63,12 +63,12 @@ export const useUserStore = defineStore("user", () => {
     localStorage.removeItem("userToken");
   }
 
-  return { 
-    user, 
-    darkMode, 
-    setDarkMode, 
-    removeUser, 
+  return {
+    user,
+    darkMode,
+    setDarkMode,
+    removeUser,
     logout,
-    setUserFromToken 
+    setUserFromToken,
   };
 });

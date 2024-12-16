@@ -27,7 +27,7 @@
                       <!-- {/* Center section - title */} -->
                       <div class="header-center">
                         <span class="page-title" style="color: #ffffff">
-                          Chat Mate
+                          Unify Live
                         </span>
                       </div>
 
@@ -75,12 +75,6 @@
                   </n-layout-header>
 
                   <n-layout-content class="content">
-                    <NavigationBar
-                      v-if="
-                        userStore.user.loggedIn && navigationItems.length > 0
-                      "
-                      :navigation-items="navigationItems"
-                    />
                     <div class="content-container">
                       <router-view></router-view>
                     </div>
@@ -106,23 +100,9 @@ import { DarkModeTwotone, WbSunnyTwotone } from "@vicons/material";
 import { LogOutOutline, Person } from "@vicons/ionicons5";
 import { darkTheme, DropdownOption, NIcon } from "naive-ui";
 import { useRouter } from "vue-router";
-import { NavigationItem } from "@/components/common/NavigationBar.vue";
 
 const userStore = useUserStore();
 userStore.setUserFromToken(localStorage.getItem("userToken")!);
-
-const navigationItems: NavigationItem[] = [
-  {
-    label: "Проекти",
-    url: "/",
-    type: "link",
-  },
-  {
-    label: "Профіль",
-    url: "/profile",
-    type: "link",
-  },
-];
 
 const router = useRouter();
 

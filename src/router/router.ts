@@ -47,8 +47,11 @@ const router = createRouter({
 
 function return_auth_url() {
   if (window.location.href.includes("localhost")) {
-    return "https://dev-auth.unify-live.com/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=https://unify-live.com/authentik_callback&response_type=code&scope=openid%20email%20profile%20offline_access&prompt=consent";
+    return "https://dev-auth.unify-live.com/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=http://localhost:8080/authentik_callback&response_type=code&scope=openid%20email%20profile%20offline_access&prompt=consent";
+  } else if (window.location.href.includes("dev-chat-ui.unify-live.com")) {
+    return "https://dev-auth.unify-live.com/application/o/authorize/?client_id=gtO0tgq7vpAr2UkDX5IPM0Xi768LwcQFr8ml2I96&redirect_uri=https://dev-chat-ui.unify-live.com/authentik_callback&response_type=code&scope=openid%20email%20profile%20offline_access&prompt=consent";
   }
+  return "/WRONG_AUTH_REDIRECY_URL";
 }
 
 router.beforeEach((to, _, next) => {

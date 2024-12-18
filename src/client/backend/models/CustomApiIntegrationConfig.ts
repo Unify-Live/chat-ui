@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { RetryConfig } from './RetryConfig';
 /**
  * Schema for custom API integration configuration.
  */
@@ -12,12 +11,16 @@ export type CustomApiIntegrationConfig = {
      */
     endpoint_url: string;
     /**
-     * Retry configuration for failed requests
+     * Maximum number of retry attempts
      */
-    retry_config?: (RetryConfig | null);
+    max_retries?: number;
+    /**
+     * Interval between retries in seconds
+     */
+    retry_interval?: number;
     /**
      * Request timeout in seconds
      */
-    timeout_seconds?: (number | null);
+    timeout_seconds?: number;
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <div ref="swipeRef" class="message-list-container" :style="swipeStyle">
+  <div ref="swipeRef" class="message-list-container">
     <n-scrollbar>
       <n-virtual-list
         v-if="messages.length"
@@ -21,42 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useSwipe } from "@vueuse/core";
 import { Message } from "@/types";
 import ChatMessage from "./ChatMessage.vue";
-import { useDialogStore } from "@/stores/dialog";
 
 defineProps<{
   messages: Message[];
 }>();
 
-const dialogStore = useDialogStore();
-const swipeRef = ref<HTMLElement | null>(null);
 
-// Swipe handling
-const { isSwiping, direction, lengthX } = useSwipe(swipeRef, {
-  threshold: 50,
-  onSwipeEnd() {
-    if (direction.value === "right" && Math.abs(lengthX.value) > 100) {
-      // Go back to dialog list
-      dialogStore.dialogOpened = false;
-    }
-  },
-});
-
-// Compute swipe animation style
-const swipeStyle = computed(() => {
-  if (!isSwiping.value) return {};
-
-  // Only allow right swipe
-  if (lengthX.value < 0) return {};
-
-  return {
-    transition: lengthX.value === 0 ? "transform 0.3s ease-out" : "none",
-    transform: `translateX(${lengthX.value}px)`,
-  };
-});
 </script>
 
 <style scoped>

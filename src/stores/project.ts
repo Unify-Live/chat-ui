@@ -1,6 +1,7 @@
 // src/stores/project.ts
-import { ProjectsService, OpenAPI } from "../client/backend";
+import { ProjectsCoreService, OpenAPI } from "../client/backend";
 import { getBackendUrl } from "../appConfig";
+import { PaginatedResponse_ProjectResponse_ } from "../client/backend/models/PaginatedResponse_ProjectResponse_";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { ProjectResponse } from "../client/backend/models/ProjectResponse";
@@ -12,13 +13,15 @@ export const useProjectsStore = defineStore("projectsStore", () => {
   const projectList = ref<ProjectResponse[]>([]);
   const newProjectName = ref("");
   const newProjectDescription = ref("");
+  
 
   function fetchMyProjects() {
     try {
-      ProjectsService.getProjectsProjectsGet().then(
-        (projects: ProjectResponse[]) => {
-          console.log(projects);
-          projectList.value = projects;
+      ProjectsCoreService.getProjectsProjectsGet().then(
+        (paginated_project_response: PaginatedResponse_ProjectResponse_) => {
+          console.log(paginated_project_response);
+          projectList.value = paginated_project_response.items;
+          console.log("Recived projects list:", projectList.value);
         },
       );
     } catch (error) {
@@ -28,7 +31,7 @@ export const useProjectsStore = defineStore("projectsStore", () => {
 
   function newProject() {
     try {
-      ProjectsService.createProjectProjectsPost({
+      ProjectsCoreService.createProjectProjectsPost({
         name: newProjectName.value,
         description: newProjectDescription.value,
       }).then(() => {

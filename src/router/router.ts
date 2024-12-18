@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import ProjectsView from "../views/ProjectsView.vue";
 import Profile from "../views/Profile.vue";
 import ProjectView from "../views/ProjectView.vue";
-import ManagersView from "../views/ManagersView.vue";
 import AuthCallbackView from "../views/AuthCallbackView.vue";
 import type { RouteLocationNormalized } from "vue-router";
 
@@ -17,12 +16,6 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: Profile,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/project/:id/managers",
-    name: "managers",
-    component: ManagersView,
     meta: { requiresAuth: true },
   },
   {

@@ -89,4 +89,28 @@ export class IntegrationsWidgetService {
             },
         });
     }
+    /**
+     * Client details widget integration
+     * Client details widget integration
+     * @param integrationUuid
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static updateWidgetIntegrationsWidgetIntegrationUuidClientDetailsGet(
+        integrationUuid: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/integrations/widget/{integration_uuid}/client-details',
+            path: {
+                'integration_uuid': integrationUuid,
+            },
+            errors: {
+                400: `Bad request`,
+                403: `Not enough permissions`,
+                404: `Integration not found`,
+                422: `Validation Error`,
+            },
+        });
+    }
 }

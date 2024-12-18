@@ -16,10 +16,6 @@ export type WidgetIntegrationConfig = {
      */
     allowed_domains?: (Array<string> | null);
     /**
-     * Custom CSS styles for widget
-     */
-    custom_css?: (string | null);
-    /**
      * Welcome message shown when widget opens
      */
     welcome_message?: (string | null);

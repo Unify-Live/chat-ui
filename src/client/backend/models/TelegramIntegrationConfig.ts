@@ -15,10 +15,6 @@ export type TelegramIntegrationConfig = {
      */
     webhook_url?: (string | null);
     /**
-     * Telegram channel or group ID
-     */
-    channel_id?: (string | null);
-    /**
      * Telegram bot username
      */
     bot_username?: (string | null);

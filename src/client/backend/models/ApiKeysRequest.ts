@@ -3,8 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type ApiKeysRequest = {
-  /**
-   * Api key description
-   */
-  description: string;
+    /**
+     * Api key description
+     */
+    description: string;
 };
+

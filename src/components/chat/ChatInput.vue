@@ -1,21 +1,11 @@
 <template>
   <div class="chat-input">
-    <button @click="openAttachments" class="attachments-button">
-      <n-icon>
-        <DocumentAttachOutline />
-      </n-icon>
-    </button>
     <input
       v-model="message_text"
       type="text"
       placeholder="Type a message..."
       class="message-input"
     />
-    <button @click="openEmojiPicker" class="emoji-button">
-      <n-icon>
-        <HappyOutline />
-      </n-icon>
-    </button>
     <button @click="sendMessage" class="send-button">
       <n-icon>
         <SendOutline />
@@ -27,11 +17,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import {
-  DocumentAttachOutline,
-  SendOutline,
-  HappyOutline,
-} from "@vicons/ionicons5";
+import {  SendOutline } from "@vicons/ionicons5";
 const message = useMessage();
 const message_text = ref("");
 
@@ -39,12 +25,6 @@ async function sendMessage() {
   if (message_text.value.trim() !== "") {
     message.success("Message sent:");
   }
-}
-async function openAttachments() {
-  message.success("Attachments button clicked. Not yet implemented.");
-}
-async function openEmojiPicker() {
-  message.success("Emoji picker button clicked. Not yet implemented.");
 }
 </script>
 

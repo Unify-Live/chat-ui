@@ -22,7 +22,7 @@ const router = useRouter();
 const userStore = useUserStore();
 
 function return_auth_url() {
-  return "https://dev-backend-api.unify-live.com/auth/exchange-code-for-token/";
+  return "https://dev-backend-api.unify-live.com/auth/token/exchange";
 }
 
 const exchangeCodeForTokens = async (code) => {

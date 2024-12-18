@@ -22,11 +22,7 @@ const router = useRouter();
 const userStore = useUserStore();
 
 function return_auth_url() {
-  if (window.location.href.includes("localhost")) {
-    //   return "http://localhost:5000/exchange-code-for-token/";
-    // } else {
-    return "https://dev-backend-api.unify-live.com/auth/exchange-code-for-token/";
-  }
+  return "https://dev-backend-api.unify-live.com/auth/exchange-code-for-token/";
 }
 
 const exchangeCodeForTokens = async (code) => {

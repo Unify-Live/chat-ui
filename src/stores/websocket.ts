@@ -33,7 +33,7 @@ export const useWebSocketStore = defineStore('websocket', () => {
 
   function sendMessage(message: string) {
     if (socket.value?.readyState === WebSocket.OPEN) {
-      socket.value.send(message);
+      socket.value.send(JSON.stringify({ "message": message }));
     }
   }
 

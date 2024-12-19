@@ -94,8 +94,9 @@
 import { themeOverridesLight, themeOverridesDark } from "./globalTheme";
 import { menuButtonThemeOverridesDark } from "./globalTheme";
 import { menuButtonThemeOverridesLight } from "./globalTheme";
-import { h, Component } from "vue";
+import { h, Component, onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useWebSocketStore } from "@/stores/websocket";
 import { DarkModeTwotone, WbSunnyTwotone } from "@vicons/material";
 import { LogOutOutline, Person } from "@vicons/ionicons5";
 import { darkTheme, DropdownOption, NIcon } from "naive-ui";
@@ -103,6 +104,13 @@ import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 userStore.setUserFromToken(localStorage.getItem("userToken")!);
+const webSocketStore = useWebSocketStore();
+
+onMounted(() => {
+  if (userStore.user.token) {
+    webSocketStore.connect(userStore.user.token);
+  }
+});
 
 const router = useRouter();
 

@@ -77,5 +77,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UserPersonalData: typeof import('./src/components/profile/UserPersonalData.vue')['default']
+    WebSocketComponent: typeof import('./src/components/WebSocketComponent.vue')['default']
   }
 }

@@ -18,12 +18,18 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import {  SendOutline } from "@vicons/ionicons5";
+import { useWebSocketStore } from "@/stores/websocket";
 const message = useMessage();
 const message_text = ref("");
+const webSocketStore = useWebSocketStore();
 
 async function sendMessage() {
   if (message_text.value.trim() !== "") {
+    webSocketStore.sendMessage(message_text.value);
     message.success("Message sent:");
+    message_text.value = "";
+  } else {
+    message.error("Message cannot be empty");
   }
 }
 </script>

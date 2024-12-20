@@ -16,7 +16,7 @@ export class ProjectsUsersService {
      * @returns ProjectUserResponse Successful Response
      * @throws ApiError
      */
-    public static addUserToProjectProjectsProjectUuidUsersPost(
+    public static addUserToProject(
         projectUuid: string,
         userEmail: string,
         role: string,
@@ -48,7 +48,7 @@ export class ProjectsUsersService {
      * @returns PaginatedResponse_ProjectUserResponse_ Successful Response
      * @throws ApiError
      */
-    public static getProjectUsersProjectsProjectUuidUsersGet(
+    public static getProjectUsers(
         projectUuid: string,
         page: number = 1,
         size: number = 10,
@@ -82,7 +82,7 @@ export class ProjectsUsersService {
      * @returns ProjectUserResponse Successful Response
      * @throws ApiError
      */
-    public static updateUserRoleProjectsProjectUuidUsersUserUuidPut(
+    public static updateUserRole(
         projectUuid: string,
         userUuid: string,
         role: string,
@@ -109,7 +109,7 @@ export class ProjectsUsersService {
      * @returns void
      * @throws ApiError
      */
-    public static removeUserFromProjectProjectsProjectUuidUsersUserUuidDelete(
+    public static removeUserFromProject(
         projectUuid: string,
         userUuid: string,
     ): CancelablePromise<void> {

@@ -17,7 +17,7 @@ export class IntegrationsCustomApiService {
      * @returns CustomApiIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static createCustomApiIntegrationsCustomApiPost(
+    public static createCustomApi(
         projectUuid: string,
         requestBody: CustomApiIntegrationCreate,
     ): CancelablePromise<CustomApiIntegrationResponse> {
@@ -44,7 +44,7 @@ export class IntegrationsCustomApiService {
      * @returns CustomApiIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static getCustomApiIntegrationsCustomApiIntegrationUuidGet(
+    public static getCustomApi(
         integrationUuid: string,
     ): CancelablePromise<CustomApiIntegrationResponse> {
         return __request(OpenAPI, {
@@ -69,7 +69,7 @@ export class IntegrationsCustomApiService {
      * @returns CustomApiIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static updateCustomApiIntegrationsCustomApiIntegrationUuidPut(
+    public static updateCustomApi(
         integrationUuid: string,
         requestBody: CustomApiIntegrationUpdate,
     ): CancelablePromise<CustomApiIntegrationResponse> {

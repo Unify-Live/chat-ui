@@ -17,7 +17,7 @@ export class IntegrationsTelegramService {
      * @returns TelegramIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static createTelegramIntegrationsTelegramPost(
+    public static createTelegram(
         projectUuid: string,
         requestBody: TelegramIntegrationCreate,
     ): CancelablePromise<TelegramIntegrationResponse> {
@@ -44,7 +44,7 @@ export class IntegrationsTelegramService {
      * @returns TelegramIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static getTelegramIntegrationsTelegramIntegrationUuidGet(
+    public static getTelegram(
         integrationUuid: string,
     ): CancelablePromise<TelegramIntegrationResponse> {
         return __request(OpenAPI, {
@@ -69,7 +69,7 @@ export class IntegrationsTelegramService {
      * @returns TelegramIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static updateTelegramIntegrationsTelegramIntegrationUuidPut(
+    public static updateTelegram(
         integrationUuid: string,
         requestBody: TelegramIntegrationUpdate,
     ): CancelablePromise<TelegramIntegrationResponse> {

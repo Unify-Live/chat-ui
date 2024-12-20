@@ -20,7 +20,7 @@ export class ProjectsCoreService {
      * @returns ProjectResponse Successful Response
      * @throws ApiError
      */
-    public static createProjectProjectsPost(
+    public static createProject(
         requestBody: ProjectCreate,
     ): CancelablePromise<ProjectResponse> {
         return __request(OpenAPI, {
@@ -47,7 +47,7 @@ export class ProjectsCoreService {
      * @returns PaginatedResponse_ProjectResponse_ List of projects
      * @throws ApiError
      */
-    public static getProjectsProjectsGet(
+    public static getProjects(
         page: number = 1,
         size: number = 10,
         search?: (string | null),
@@ -78,7 +78,7 @@ export class ProjectsCoreService {
      * @returns ProjectResponse Successful Response
      * @throws ApiError
      */
-    public static getProjectProjectsProjectUuidGet(
+    public static getProject(
         projectUuid: string,
     ): CancelablePromise<ProjectResponse> {
         return __request(OpenAPI, {
@@ -102,7 +102,7 @@ export class ProjectsCoreService {
      * @returns ProjectResponse Successful Response
      * @throws ApiError
      */
-    public static updateProjectProjectsProjectUuidPut(
+    public static updateProject(
         projectUuid: string,
         requestBody: ProjectCreate,
     ): CancelablePromise<ProjectResponse> {
@@ -128,7 +128,7 @@ export class ProjectsCoreService {
      * @returns void
      * @throws ApiError
      */
-    public static deleteProjectProjectsProjectUuidDelete(
+    public static deleteProject(
         projectUuid: string,
     ): CancelablePromise<void> {
         return __request(OpenAPI, {

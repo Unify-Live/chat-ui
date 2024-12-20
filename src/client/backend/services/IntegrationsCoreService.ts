@@ -6,7 +6,7 @@ import type { PaginatedResponse_IntegrationResponse_ } from '../models/Paginated
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-export class IntegrationsService {
+export class IntegrationsCoreService {
     /**
      * Get project integrations
      * Retrieve a list of all integrations for the specified project
@@ -19,7 +19,7 @@ export class IntegrationsService {
      * @returns PaginatedResponse_IntegrationResponse_ Successful Response
      * @throws ApiError
      */
-    public static getProjectIntegrationListIntegrationsProjectProjectUuidGet(
+    public static getProjectIntegrationList(
         projectUuid: string,
         page: number = 1,
         size: number = 10,
@@ -55,7 +55,7 @@ export class IntegrationsService {
      * @returns void
      * @throws ApiError
      */
-    public static deleteIntegrationByIdIntegrationsIntegrationUuidDelete(
+    public static deleteIntegration(
         integrationUuid: string,
     ): CancelablePromise<void> {
         return __request(OpenAPI, {

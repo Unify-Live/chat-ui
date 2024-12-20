@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserResponse } from './UserResponse';
-export type PaginatedResponse_UserResponse_ = {
+import type { ClientResponse } from './ClientResponse';
+export type PaginatedResponse_ClientResponse_ = {
     /**
      * List of items for the current page
      */
-    items: Array<UserResponse>;
+    items: Array<ClientResponse>;
     /**
      * Total number of items
      */

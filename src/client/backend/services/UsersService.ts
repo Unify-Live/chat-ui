@@ -15,7 +15,7 @@ export class UsersService {
      * @returns UserResponse Successful Response
      * @throws ApiError
      */
-    public static getCurrentUserProfileUsersMeGet(): CancelablePromise<UserResponse> {
+    public static getCurrentUserProfile(): CancelablePromise<UserResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/me',
@@ -28,7 +28,7 @@ export class UsersService {
      * @returns UserResponse Successful Response
      * @throws ApiError
      */
-    public static updateCurrentUserProfileUsersMePut(
+    public static updateCurrentUserProfile(
         requestBody: UserUpdate,
     ): CancelablePromise<UserResponse> {
         return __request(OpenAPI, {
@@ -52,7 +52,7 @@ export class UsersService {
      * @returns PaginatedResponse_UserResponse_ Successful Response
      * @throws ApiError
      */
-    public static searchUsersUsersSearchGet(
+    public static searchUsers(
         page: number = 1,
         size: number = 10,
         search?: (string | null),

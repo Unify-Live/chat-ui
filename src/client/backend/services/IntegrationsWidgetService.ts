@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { WidgetIntegrationConfig } from '../models/WidgetIntegrationConfig';
 import type { WidgetIntegrationCreate } from '../models/WidgetIntegrationCreate';
 import type { WidgetIntegrationResponse } from '../models/WidgetIntegrationResponse';
 import type { WidgetIntegrationUpdate } from '../models/WidgetIntegrationUpdate';
@@ -12,21 +13,16 @@ export class IntegrationsWidgetService {
     /**
      * Create widget integration
      * Create a new widget integration for the project
-     * @param projectUuid
      * @param requestBody
      * @returns WidgetIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static createWidgetIntegrationsWidgetPost(
-        projectUuid: string,
+    public static createWidget(
         requestBody: WidgetIntegrationCreate,
     ): CancelablePromise<WidgetIntegrationResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/integrations/widget',
-            query: {
-                'project_uuid': projectUuid,
-            },
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -44,7 +40,7 @@ export class IntegrationsWidgetService {
      * @returns WidgetIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static getWidgetIntegrationsWidgetIntegrationUuidGet(
+    public static getWidget(
         integrationUuid: string,
     ): CancelablePromise<WidgetIntegrationResponse> {
         return __request(OpenAPI, {
@@ -69,12 +65,12 @@ export class IntegrationsWidgetService {
      * @returns WidgetIntegrationResponse Successful Response
      * @throws ApiError
      */
-    public static updateWidgetIntegrationsWidgetIntegrationUuidPut(
+    public static updateWidget(
         integrationUuid: string,
         requestBody: WidgetIntegrationUpdate,
     ): CancelablePromise<WidgetIntegrationResponse> {
         return __request(OpenAPI, {
-            method: 'PUT',
+            method: 'PATCH',
             url: '/integrations/widget/{integration_uuid}',
             path: {
                 'integration_uuid': integrationUuid,
@@ -90,18 +86,18 @@ export class IntegrationsWidgetService {
         });
     }
     /**
-     * Client details widget integration
-     * Client details widget integration
+     * Client config widget integration
+     * Client config widget integration
      * @param integrationUuid
-     * @returns any Successful Response
+     * @returns WidgetIntegrationConfig Successful Response
      * @throws ApiError
      */
-    public static updateWidgetIntegrationsWidgetIntegrationUuidClientDetailsGet(
+    public static getWidgetClientConfig(
         integrationUuid: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<WidgetIntegrationConfig> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/integrations/widget/{integration_uuid}/client-details',
+            url: '/integrations/widget/{integration_uuid}/client-config',
             path: {
                 'integration_uuid': integrationUuid,
             },

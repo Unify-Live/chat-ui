@@ -6,6 +6,7 @@ import type { ApiKeys } from '../models/ApiKeys';
 import type { ApiKeysRequest } from '../models/ApiKeysRequest';
 import type { CodeRequest } from '../models/CodeRequest';
 import type { TokenResponse } from '../models/TokenResponse';
+import type { TokenResponseWithoutRefresh } from '../models/TokenResponseWithoutRefresh';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -17,7 +18,7 @@ export class AuthenticationService {
      * @returns TokenResponse Successful Response
      * @throws ApiError
      */
-    public static exchangeCodeForTokenAuthTokenExchangePost(
+    public static exchangeCodeForToken(
         requestBody: CodeRequest,
     ): CancelablePromise<TokenResponse> {
         return __request(OpenAPI, {
@@ -37,7 +38,7 @@ export class AuthenticationService {
      * @returns ApiKeys Successful Response
      * @throws ApiError
      */
-    public static createApiCredentialsAuthApiCredentialsPost(
+    public static createApiCredentials(
         requestBody: ApiKeysRequest,
     ): CancelablePromise<ApiKeys> {
         return __request(OpenAPI, {
@@ -54,12 +55,12 @@ export class AuthenticationService {
      * Exchange Api Credentials For Token
      * Exchange API credentials (client_id and client_secret) for JWT access token
      * @param requestBody
-     * @returns TokenResponse Successful Response
+     * @returns TokenResponseWithoutRefresh Successful Response
      * @throws ApiError
      */
-    public static exchangeApiCredentialsForTokenAuthTokenApiExchangePost(
+    public static exchangeApiCredentialsForToken(
         requestBody: ApiKeys,
-    ): CancelablePromise<TokenResponse> {
+    ): CancelablePromise<TokenResponseWithoutRefresh> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/auth/token/api-exchange',

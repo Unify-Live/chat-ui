@@ -4,6 +4,9 @@
 /* eslint-disable */
 import type { ProjectResponse } from './ProjectResponse';
 export type PaginatedResponse_ProjectResponse_ = {
+    /**
+     * List of items for the current page
+     */
     items: Array<ProjectResponse>;
     /**
      * Total number of items

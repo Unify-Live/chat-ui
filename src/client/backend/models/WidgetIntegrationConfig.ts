@@ -14,10 +14,14 @@ export type WidgetIntegrationConfig = {
     /**
      * List of domains where widget can be embedded
      */
-    allowed_domains?: (Array<string> | null);
+    allowed_domain: string;
     /**
      * Welcome message shown when widget opens
      */
     welcome_message?: (string | null);
+    /**
+     * Title of the chat window
+     */
+    chat_window_title: string;
 };
 

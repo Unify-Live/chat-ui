@@ -17,7 +17,7 @@ export const useProjectsStore = defineStore("projectsStore", () => {
 
   function fetchMyProjects() {
     try {
-      ProjectsCoreService.getProjectsProjectsGet().then(
+      ProjectsCoreService.getProjects().then(
         (paginated_project_response: PaginatedResponse_ProjectResponse_) => {
           console.log(paginated_project_response);
           projectList.value = paginated_project_response.items;
@@ -31,7 +31,7 @@ export const useProjectsStore = defineStore("projectsStore", () => {
 
   function newProject() {
     try {
-      ProjectsCoreService.createProjectProjectsPost({
+      ProjectsCoreService.createProject({
         name: newProjectName.value,
         description: newProjectDescription.value,
       }).then(() => {

@@ -15,7 +15,7 @@ export class ProjectsInvitesService {
      * @returns ProjectInviteResponse Successful Response
      * @throws ApiError
      */
-    public static createProjectInviteProjectsProjectUuidInvitesPost(
+    public static createProjectInvite(
         projectUuid: string,
         requestBody: ProjectInviteCreate,
     ): CancelablePromise<ProjectInviteResponse> {
@@ -38,7 +38,7 @@ export class ProjectsInvitesService {
      * @returns ProjectInviteResponse Successful Response
      * @throws ApiError
      */
-    public static getProjectInvitesProjectsProjectUuidInvitesGet(
+    public static getProjectInvites(
         projectUuid: string,
     ): CancelablePromise<Array<ProjectInviteResponse>> {
         return __request(OpenAPI, {
@@ -58,7 +58,7 @@ export class ProjectsInvitesService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static acceptProjectInviteProjectsProjectUuidInvitesAcceptTokenPost(
+    public static acceptProjectInvite(
         token: string,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -79,7 +79,7 @@ export class ProjectsInvitesService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static cancelProjectInviteProjectsProjectUuidInvitesInviteUuidCancelPost(
+    public static cancelProjectInvite(
         projectUuid: string,
         inviteUuid: string,
     ): CancelablePromise<any> {

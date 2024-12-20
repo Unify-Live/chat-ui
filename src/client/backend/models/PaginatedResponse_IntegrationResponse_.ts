@@ -4,6 +4,9 @@
 /* eslint-disable */
 import type { IntegrationResponse } from './IntegrationResponse';
 export type PaginatedResponse_IntegrationResponse_ = {
+    /**
+     * List of items for the current page
+     */
     items: Array<IntegrationResponse>;
     /**
      * Total number of items

@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserResponse } from './UserResponse';
-export type PaginatedResponse_UserResponse_ = {
+import type { ChatResponse } from './ChatResponse';
+export type PaginatedResponse_ChatResponse_ = {
     /**
      * List of items for the current page
      */
-    items: Array<UserResponse>;
+    items: Array<ChatResponse>;
     /**
      * Total number of items
      */

@@ -6,6 +6,6 @@
  * Available message types in the system.
  */
 export enum MessageType {
-    TEXT = 'text',
-    FILE = 'file',
+  TEXT = "text",
+  FILE = "file",
 }

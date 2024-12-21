@@ -27,8 +27,6 @@ import ChatMessage from "./ChatMessage.vue";
 defineProps<{
   messages: Message[];
 }>();
-
-
 </script>
 
 <style scoped>

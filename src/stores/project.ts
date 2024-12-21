@@ -13,7 +13,6 @@ export const useProjectsStore = defineStore("projectsStore", () => {
   const projectList = ref<ProjectResponse[]>([]);
   const newProjectName = ref("");
   const newProjectDescription = ref("");
-  
 
   function fetchMyProjects() {
     try {

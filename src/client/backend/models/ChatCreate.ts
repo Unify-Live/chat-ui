@@ -6,17 +6,16 @@
  * Schema for creating a new chat.
  */
 export type ChatCreate = {
-    /**
-     * Integration UUID
-     */
-    integration_uuid: string;
-    /**
-     * Chat title
-     */
-    title?: (string | null);
-    /**
-     * Chat description
-     */
-    description?: (string | null);
+  /**
+   * Integration UUID
+   */
+  integration_uuid: string;
+  /**
+   * Chat title
+   */
+  title?: string | null;
+  /**
+   * Chat description
+   */
+  description?: string | null;
 };
-

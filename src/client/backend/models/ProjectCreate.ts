@@ -6,13 +6,12 @@
  * Schema for creating a new project.
  */
 export type ProjectCreate = {
-    /**
-     * Name of the project
-     */
-    name: string;
-    /**
-     * Optional project description
-     */
-    description?: (string | null);
+  /**
+   * Name of the project
+   */
+  name: string;
+  /**
+   * Optional project description
+   */
+  description?: string | null;
 };
-

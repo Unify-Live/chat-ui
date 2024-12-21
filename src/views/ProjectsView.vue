@@ -89,12 +89,10 @@ function handleCreateProject() {
   message.success("Project created successfully");
 }
 
-
 // Setup mobile detection
 onMounted(() => {
   projectStore.fetchMyProjects();
 });
-
 
 const columns: DataTableColumns<ProjectResponse> = [
   {
@@ -126,7 +124,7 @@ const columns: DataTableColumns<ProjectResponse> = [
     render: (row: ProjectResponse) => {
       return row.uuid;
     },
-  }
+  },
 ];
 
 onMounted(async () => {
@@ -135,4 +133,3 @@ onMounted(async () => {
   isLoading.value = false;
 });
 </script>
-

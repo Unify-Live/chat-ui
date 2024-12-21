@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 import {
   ChatbubbleEllipses,
   Settings,
@@ -41,80 +41,80 @@ import {
   Cog,
   Document,
   Checkmark,
-  Calendar
-} from '@vicons/ionicons5'
-import type { Component } from 'vue'
-import ChatView from '@/views/ChatView.vue'
-import IntegrationsView from '@/views/IntegrationsView.vue'
+  Calendar,
+} from "@vicons/ionicons5";
+import type { Component } from "vue";
+import ChatView from "@/views/ChatView.vue";
+import IntegrationsView from "@/views/IntegrationsView.vue";
 
 interface NavigationItem {
-  key: string
-  label: string
-  icon: Component
-  component: Component
+  key: string;
+  label: string;
+  icon: Component;
+  component: Component;
 }
 
-const activeView = ref('chat')
+const activeView = ref("chat");
 
 const navigationItems: NavigationItem[] = [
-  { 
-    key: 'chat', 
-    label: 'Chat', 
+  {
+    key: "chat",
+    label: "Chat",
     icon: ChatbubbleEllipses,
-    component: ChatView 
+    component: ChatView,
   },
-  { 
-    key: 'integrations', 
-    label: 'Integrations', 
+  {
+    key: "integrations",
+    label: "Integrations",
     icon: Settings,
-    component: IntegrationsView 
+    component: IntegrationsView,
   },
-  { 
-    key: 'analytics', 
-    label: 'Analytics', 
+  {
+    key: "analytics",
+    label: "Analytics",
     icon: Analytics,
-    component: ChatView // Replace with actual component
+    component: ChatView, // Replace with actual component
   },
-  { 
-    key: 'customers', 
-    label: 'Customers', 
+  {
+    key: "customers",
+    label: "Customers",
     icon: People,
-    component: ChatView // Replace with actual component
+    component: ChatView, // Replace with actual component
   },
-  { 
-    key: 'settings', 
-    label: 'Settings', 
+  {
+    key: "settings",
+    label: "Settings",
     icon: Cog,
-    component: ChatView // Replace with actual component
+    component: ChatView, // Replace with actual component
   },
-  { 
-    key: 'reports', 
-    label: 'Reports', 
+  {
+    key: "reports",
+    label: "Reports",
     icon: Document,
-    component: ChatView // Replace with actual component
+    component: ChatView, // Replace with actual component
   },
-  { 
-    key: 'tasks', 
-    label: 'Tasks', 
+  {
+    key: "tasks",
+    label: "Tasks",
     icon: Checkmark,
-    component: ChatView // Replace with actual component
+    component: ChatView, // Replace with actual component
   },
-  { 
-    key: 'calendar', 
-    label: 'Calendar', 
+  {
+    key: "calendar",
+    label: "Calendar",
     icon: Calendar,
-    component: ChatView // Replace with actual component
-  }
-]
+    component: ChatView, // Replace with actual component
+  },
+];
 
 const currentView = computed(() => {
-  const item = navigationItems.find(item => item.key === activeView.value)
-  return item?.component || ChatView
-})
+  const item = navigationItems.find((item) => item.key === activeView.value);
+  return item?.component || ChatView;
+});
 
 const setActiveView = (key: string) => {
-  activeView.value = key
-}
+  activeView.value = key;
+};
 </script>
 
 <style scoped>

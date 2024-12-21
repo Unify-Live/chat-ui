@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import {  SendOutline } from "@vicons/ionicons5";
+import { SendOutline } from "@vicons/ionicons5";
 import { useWebSocketStore } from "@/stores/websocket";
 const message = useMessage();
 const message_text = ref("");

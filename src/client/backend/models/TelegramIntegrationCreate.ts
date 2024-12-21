@@ -2,10 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { TelegramIntegrationConfig } from './TelegramIntegrationConfig';
-/**
- * Schema for creating a new telegram integration.
- */
 export type TelegramIntegrationCreate = {
     /**
      * Integration name
@@ -20,8 +16,16 @@ export type TelegramIntegrationCreate = {
      */
     project_uuid: string;
     /**
-     * Telegram bot configuration
+     * Telegram bot token from BotFather
      */
-    config: TelegramIntegrationConfig;
+    bot_token: string;
+    /**
+     * Ask for phone number
+     */
+    ask_for_phone_number: boolean;
+    /**
+     * Greeting message text
+     */
+    greetings_message_text: string;
 };
 

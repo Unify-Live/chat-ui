@@ -12,21 +12,16 @@ export class IntegrationsTelegramService {
     /**
      * Create telegram integration
      * Create a new telegram integration for the project
-     * @param projectUuid
      * @param requestBody
      * @returns TelegramIntegrationResponse Successful Response
      * @throws ApiError
      */
     public static createTelegram(
-        projectUuid: string,
         requestBody: TelegramIntegrationCreate,
     ): CancelablePromise<TelegramIntegrationResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/integrations/telegram',
-            query: {
-                'project_uuid': projectUuid,
-            },
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -74,7 +69,7 @@ export class IntegrationsTelegramService {
         requestBody: TelegramIntegrationUpdate,
     ): CancelablePromise<TelegramIntegrationResponse> {
         return __request(OpenAPI, {
-            method: 'PUT',
+            method: 'PATCH',
             url: '/integrations/telegram/{integration_uuid}',
             path: {
                 'integration_uuid': integrationUuid,

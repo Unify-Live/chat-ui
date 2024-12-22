@@ -3,24 +3,25 @@
 /* tslint:disable */
 /* eslint-disable */
 export type TokenResponse = {
-  /**
-   * The token used to authenticate and authorize API requests. Typically a JWT or opaque string.
-   */
-  access_token: string;
-  /**
-   * Specifies the type of token issued. Commonly 'Bearer', indicating how the access_token should be included in requests.
-   */
-  token_type: string;
-  /**
-   * The duration in seconds for which the access token is valid. After expiration, a new token must be obtained.
-   */
-  expires_in: number;
-  /**
-   * A JWT that contains identity claims about the authenticated user. Used in OpenID Connect scenarios.
-   */
-  id_token: string;
-  /**
-   * A long-lived token used to obtain a new access token without requiring the user to reauthenticate.
-   */
-  refresh_token: string;
+    /**
+     * The token used to authenticate and authorize API requests. Typically a JWT or opaque string.
+     */
+    access_token: string;
+    /**
+     * Specifies the type of token issued. Commonly 'Bearer', indicating how the access_token should be included in requests.
+     */
+    token_type: string;
+    /**
+     * The duration in seconds for which the access token is valid. After expiration, a new token must be obtained.
+     */
+    expires_in: number;
+    /**
+     * A JWT that contains identity claims about the authenticated user. Used in OpenID Connect scenarios.
+     */
+    id_token: string;
+    /**
+     * A long-lived token used to obtain a new access token without requiring the user to reauthenticate.
+     */
+    refresh_token: string;
 };
+

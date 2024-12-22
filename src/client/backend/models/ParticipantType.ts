@@ -6,6 +6,6 @@
  * Types of chat participant.
  */
 export enum ParticipantType {
-  MANAGER = "manager",
-  CLIENT = "client",
+    MANAGER = 'manager',
+    CLIENT = 'client',
 }

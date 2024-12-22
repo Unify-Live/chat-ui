@@ -2,12 +2,12 @@
   <div ref="swipeRef" class="message-list-container">
     <n-scrollbar>
       <n-virtual-list
-        v-if="messages.length"
+        v-if="chatStore.messagesList.length > 0"
         class="message-virtual-list"
-        :items="messages"
+        :items="chatStore.messagesList"
         :item-size="64"
         item-resizable
-        :key-field="'id'"
+        :key-field="'uuid'"
       >
         <template #default="{ item: message }">
           <div class="message-item">
@@ -21,12 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from "@/types";
+import { useChatStore } from "@/stores/chat";
 import ChatMessage from "./ChatMessage.vue";
 
-defineProps<{
-  messages: Message[];
-}>();
+const chatStore = useChatStore();
 </script>
 
 <style scoped>

@@ -2,7 +2,10 @@
   <div class="chat-window">
     <ChatHeader />
     <div class="chat-content">
-      <MessageList v-if="dialogStore.dialogOpened" :messages="messages" />
+      <MessageList
+        v-if="chatStore.chatOpened"
+        :messages="chatStore.messagesList"
+      />
       <div v-else class="empty-state">No dialog selected.</div>
     </div>
     <ChatInput />
@@ -13,23 +16,27 @@
 import { ref, onMounted } from "vue";
 import ChatInput from "./ChatInput.vue";
 import ChatMessage from "./ChatMessage.vue";
-import { messageMockList } from "@/stores/dialog";
 import MessageList from "./MessageList.vue";
-import { useDialogStore } from "@/stores/dialog";
+import { useChatStore } from "@/stores/chat";
+
+const newMessage = ref("");
+const messagesRef = ref(null);
+const chatStore = useChatStore();
 
 // Props
 const props = defineProps({
-  dialogId: {
+  selectedChatUuid: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
+onMounted(() => {
+  chatStore.fetchMessagesList(props.selectedChatUuid);
+});
+
 // Refs
-const messages = ref(messageMockList);
-const newMessage = ref("");
-const messagesRef = ref(null);
-const dialogStore = useDialogStore();
+
 // Methods
 const scrollToBottom = () => {
   const messagesContainer = messagesRef.value;

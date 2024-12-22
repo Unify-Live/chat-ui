@@ -1,33 +1,20 @@
 <template>
-  <n-card
-    :class="[
-      message.side,
-      'message-card',
-      userStore.darkMode ? 'dark-theme' : 'light-theme',
-    ]"
-    bordered
-    hoverable
-    size="small"
-  >
+  <n-card bordered hoverable size="small">
     <span>{{ message.content }}</span>
     <p class="message-time">
-      {{ message.createdAt.getHours() }}:{{
-        String(message.createdAt.getMinutes()).padStart(2, "0")
-      }}
+      {{ message.created_at }}
     </p>
   </n-card>
 </template>
 
 <script setup lang="ts">
-import { Message } from "@/types";
-import { useUserStore } from "@/stores/user";
+import { MessageResponse } from "@/client/backend/models/MessageResponse";
 import { useThemeVars } from "naive-ui";
 
 defineProps<{
-  message: Message;
+  message: MessageResponse;
 }>();
 
-const userStore = useUserStore();
 const themeVars = useThemeVars();
 </script>
 

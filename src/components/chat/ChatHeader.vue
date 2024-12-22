@@ -1,20 +1,9 @@
 <template>
   <div class="chat-header">
     <div class="header-left">
-      <button
-        v-if="dialogStore.dialogOpened"
-        @click="backToDialogs"
-        class="back-button"
-        aria-label="Back to dialogs"
-      >
-        <n-icon>
-          <CaretBackSharp />
-        </n-icon>
-      </button>
-      <n-avatar round size="large" :src="dialogStore.activeDialog.imageUrl" />
       <div class="client-info">
-        <h2 class="client-name">{{ dialogStore.activeDialog.name }}</h2>
-        <span class="client-source">{{ dialogStore.activeDialog.source }}</span>
+        <h2 class="client-name">name</h2>
+        <span class="client-source">source</span>
       </div>
     </div>
     <div class="header-right">
@@ -35,17 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import { CaretBackSharp, SettingsOutline } from "@vicons/ionicons5";
+import { SettingsOutline } from "@vicons/ionicons5";
 import { useMessage } from "naive-ui";
-import { useDialogStore } from "@/stores/dialog";
 
 const message = useMessage();
-const dialogStore = useDialogStore();
-
-const backToDialogs = () => {
-  dialogStore.dropActive();
-  dialogStore.dialogOpened = false;
-};
 
 const openSettings = () => {
   message.info("Settings clicked. Not yet implemented.");

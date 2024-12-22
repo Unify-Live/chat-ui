@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type ApiKeys = {
-    /**
-     * Username of the new
-     */
-    client_id: string;
-    /**
-     * User token for authentication
-     */
-    client_secret: string;
+  /**
+   * Username of the new
+   */
+  client_id: string;
+  /**
+   * User token for authentication
+   */
+  client_secret: string;
 };
-

@@ -6,7 +6,7 @@
  * Available integration types.
  */
 export enum IntegrationType {
-    WIDGET = 'widget',
-    TELEGRAM = 'telegram',
-    CUSTOM_API = 'custom_api',
+  WIDGET = "widget",
+  TELEGRAM = "telegram",
+  CUSTOM_API = "custom_api",
 }

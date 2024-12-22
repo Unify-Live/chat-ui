@@ -25,7 +25,7 @@
     </n-layout-sider>
     <n-layout>
       <n-layout-content class="p-6 bg-gray-50">
-        <component :is="currentView" />
+        <component :is="currentView" v-bind="componentProps" />
       </n-layout-content>
     </n-layout>
   </n-layout>
@@ -46,6 +46,7 @@ import {
 import type { Component } from "vue";
 import ChatView from "@/views/ChatView.vue";
 import IntegrationsView from "@/views/IntegrationsView.vue";
+import { useRoute } from "vue-router";
 
 interface NavigationItem {
   key: string;
@@ -54,6 +55,12 @@ interface NavigationItem {
   component: Component;
 }
 
+const componentProps = computed(() => ({
+  projectId: projectId.value,
+}));
+
+const route = useRoute();
+const projectId = computed(() => route.params.id as string);
 const activeView = ref("chat");
 
 const navigationItems: NavigationItem[] = [

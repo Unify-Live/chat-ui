@@ -2,23 +2,33 @@
   <div class="project-view">
     <div class="dialog-list">
       <div class="dialog-list-content">
-        <DialogList />
+        <ChatsList :projectId="projectId" />
       </div>
     </div>
 
     <div class="chat-window">
-      <ChatWindow :dialogId="dialogStore.activeDialog.id" />
+      <ChatWindow />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import DialogList from "@/components/dialog/DialogList.vue";
+import ChatsList from "@/components/dialog/ChatsList.vue";
 import ChatWindow from "@/components/chat/ChatWindow.vue";
-import { useDialogStore } from "@/stores/dialog";
+import { useChatStore } from "@/stores/chat";
 
-const dialogStore = useDialogStore();
+const chatStore = useChatStore();
+
+// Props
+const props = defineProps({
+  projectId: {
+    type: String,
+    required: false,
+  },
+});
+
+console.log(props.projectId);
 
 onMounted(() => {});
 </script>

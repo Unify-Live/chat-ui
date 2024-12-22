@@ -1,29 +1,37 @@
 <template>
   <n-virtual-list
     class="dialog-virtual-list"
-    :items="dialogStore.returnFilterDialogs()"
+    :items="chatStore.chatList"
     :item-size="64"
     item-resizable
     :key-field="'id'"
     style="max-height: 70vh"
   >
-    <template #default="{ item: dialog }">
-      <div
-        class="dialog-item"
-        :key="dialog.id"
-        @click="dialogStore.selectActive(dialog)"
-      >
-        <DialogItem :dialog="dialog" />
+    <template #default="{ item: chat }">
+      <div class="dialog-item" :key="chat.id">
+        <ChatItem :chat="chat" />
       </div>
     </template>
   </n-virtual-list>
 </template>
 
 <script lang="ts" setup>
-import DialogItem from "./DialogItem.vue";
-import { useDialogStore } from "@/stores/dialog";
+import ChatItem from "./ChatItem.vue";
+import { onMounted } from "vue";
+import { useChatStore } from "@/stores/chat";
 
-const dialogStore = useDialogStore();
+const chatStore = useChatStore();
+
+const props = defineProps({
+  projectId: {
+    type: String,
+    required: true,
+  },
+});
+
+onMounted(() => {
+  chatStore.fetchChats(props.projectId);
+});
 </script>
 
 <style scoped>

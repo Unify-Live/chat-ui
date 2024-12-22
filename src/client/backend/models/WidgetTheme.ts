@@ -6,7 +6,7 @@
  * Available widget themes.
  */
 export enum WidgetTheme {
-    LIGHT = 'light',
-    DARK = 'dark',
-    AUTO = 'auto',
+  LIGHT = "light",
+  DARK = "dark",
+  AUTO = "auto",
 }

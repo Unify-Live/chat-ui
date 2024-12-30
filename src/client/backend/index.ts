@@ -60,6 +60,7 @@ export type { UserResponse } from "./models/UserResponse";
 export type { UserUpdate } from "./models/UserUpdate";
 export type { ValidationError } from "./models/ValidationError";
 export type { WidgetClientTypingPayload } from "./models/WidgetClientTypingPayload";
+export { WidgetEventTypes } from "./models/WidgetEventTypes";
 export type { WidgetIntegrationConfig } from "./models/WidgetIntegrationConfig";
 export type { WidgetIntegrationCreate } from "./models/WidgetIntegrationCreate";
 export type { WidgetIntegrationResponse } from "./models/WidgetIntegrationResponse";

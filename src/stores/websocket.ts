@@ -1,8 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { MessageResponse } from "@/client/backend";
 import { useChatStore } from "@/stores/chat";
-import { WidgetClientTypingPayload } from "@/client/backend";
+import {
+  MessageCreate,
+  WidgetEventTypes,
+  WidgetClientTypingPayload,
+  MessageResponse,
+} from "@/client/backend";
 
 export const useWebSocketStore = defineStore("websocket", () => {
   const socket = ref<WebSocket | null>(null);
@@ -20,10 +24,10 @@ export const useWebSocketStore = defineStore("websocket", () => {
 
     socket.value.onmessage = (event) => {
       const serializedData = JSON.parse(event.data);
-      if (serializedData.type === "new_message") {
+      if (serializedData.type === WidgetEventTypes.NEW_MESSAGE_FROM_CLIENT) {
         const incomingMessage: MessageResponse = serializedData.content;
         chatStore.handleNewMessageFromWebsocket(incomingMessage);
-      } else if (serializedData.type === "typing") {
+      } else if (serializedData.type === WidgetEventTypes.CLIENT_TYPING) {
         const typingPayload: WidgetClientTypingPayload = serializedData.content;
         chatStore.handleClientTypingText(typingPayload);
       }
@@ -42,7 +46,7 @@ export const useWebSocketStore = defineStore("websocket", () => {
     };
   }
 
-  function sendMessage(message: string) {
+  function sendMessage(message: MessageCreate) {
     if (socket.value?.readyState === WebSocket.OPEN) {
       socket.value.send(JSON.stringify({ message: message }));
     }

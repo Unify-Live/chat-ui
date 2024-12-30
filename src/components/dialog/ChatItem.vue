@@ -37,6 +37,7 @@ const chatStore = useChatStore();
 function openChat(chat: ChatResponse) {
   chatStore.chatOpened = true;
   chatStore.selectedChat = chat;
+  chatStore.clientTypingText = "";
   chatStore.fetchMessagesList(chat.uuid);
   console.log("Chat opened", chat);
 }

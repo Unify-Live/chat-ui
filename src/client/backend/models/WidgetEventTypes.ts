@@ -2,10 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-/**
- * Message types.
- */
-export enum MessageType {
-  TEXT = "text",
-  FILE = "file",
+export enum WidgetEventTypes {
+  NEW_MESSAGE_FROM_CLIENT = "new_message_from_client",
+  CLIENT_TYPING = "client_typing",
 }

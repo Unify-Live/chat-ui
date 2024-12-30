@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MessageAttachment } from "./MessageAttachment";
 import type { MessageStatus } from "./MessageStatus";
 import type { MessageType } from "./MessageType";
 /**
@@ -10,47 +9,51 @@ import type { MessageType } from "./MessageType";
  */
 export type MessageResponse = {
   /**
-   * Unique identifier of the message
+   * Message UUID
    */
   uuid: string;
   /**
-   * UUID of the chat this message belongs to
+   * Chat UUID
    */
   chat_uuid: string;
   /**
-   * UUID of the message sender
+   * Sender participant UUID
    */
   participant_uuid: string;
   /**
-   * Text content of the message
+   * Message content
    */
   content: string;
   /**
-   * Type of the message
+   * Message type
    */
   message_type: MessageType;
   /**
-   * Current delivery status of the message
+   * Message status
    */
   status: MessageStatus;
   /**
-   * UUID of the message this is a reply to
-   */
-  reply_to_uuid?: string | null;
-  /**
-   * Message ID in external system
+   * External system ID
    */
   external_id?: string | null;
   /**
-   * List of files attached to this message
+   * Replied message UUID
    */
-  attachments?: Array<MessageAttachment>;
+  reply_to_uuid?: string | null;
   /**
-   * Timestamp when message was created
+   * Creation timestamp
    */
   created_at: string;
   /**
-   * Timestamp when message was last updated
+   * Last update timestamp
    */
   updated_at: string;
+  /**
+   * Name of message sender
+   */
+  sender_name?: string | null;
+  /**
+   * Content of replied message
+   */
+  reply_to_content?: string | null;
 };

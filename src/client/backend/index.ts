@@ -9,6 +9,8 @@ export type { OpenAPIConfig } from "./core/OpenAPI";
 
 export type { ApiKeys } from "./models/ApiKeys";
 export type { ApiKeysRequest } from "./models/ApiKeysRequest";
+export type { AttachmentCreate } from "./models/AttachmentCreate";
+export type { AttachmentResponse } from "./models/AttachmentResponse";
 export type { AuthenticatedApi } from "./models/AuthenticatedApi";
 export type { AuthenticatedUser } from "./models/AuthenticatedUser";
 export type { BlockReason } from "./models/BlockReason";
@@ -30,7 +32,7 @@ export type { HTTPValidationError } from "./models/HTTPValidationError";
 export type { IntegrationResponse } from "./models/IntegrationResponse";
 export { IntegrationStatus } from "./models/IntegrationStatus";
 export { IntegrationType } from "./models/IntegrationType";
-export type { MessageAttachment } from "./models/MessageAttachment";
+export { ManagerWsEventTypes } from "./models/ManagerWsEventTypes";
 export type { MessageCreate } from "./models/MessageCreate";
 export type { MessageResponse } from "./models/MessageResponse";
 export { MessageStatus } from "./models/MessageStatus";
@@ -58,6 +60,8 @@ export type { TokenResponseWithoutRefresh } from "./models/TokenResponseWithoutR
 export type { UserResponse } from "./models/UserResponse";
 export type { UserUpdate } from "./models/UserUpdate";
 export type { ValidationError } from "./models/ValidationError";
+export type { WidgetClientTypingPayload } from "./models/WidgetClientTypingPayload";
+export { WidgetEventTypes } from "./models/WidgetEventTypes";
 export type { WidgetIntegrationConfig } from "./models/WidgetIntegrationConfig";
 export type { WidgetIntegrationCreate } from "./models/WidgetIntegrationCreate";
 export type { WidgetIntegrationResponse } from "./models/WidgetIntegrationResponse";

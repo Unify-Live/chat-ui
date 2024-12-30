@@ -32,6 +32,7 @@ export type { HTTPValidationError } from "./models/HTTPValidationError";
 export type { IntegrationResponse } from "./models/IntegrationResponse";
 export { IntegrationStatus } from "./models/IntegrationStatus";
 export { IntegrationType } from "./models/IntegrationType";
+export { ManagerWsEventTypes } from "./models/ManagerWsEventTypes";
 export type { MessageCreate } from "./models/MessageCreate";
 export type { MessageResponse } from "./models/MessageResponse";
 export { MessageStatus } from "./models/MessageStatus";

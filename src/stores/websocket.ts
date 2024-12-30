@@ -5,6 +5,7 @@ import {
   MessageCreate,
   WidgetEventTypes,
   WidgetClientTypingPayload,
+  ManagerWsEventTypes,
   MessageResponse,
 } from "@/client/backend";
 
@@ -24,7 +25,7 @@ export const useWebSocketStore = defineStore("websocket", () => {
 
     socket.value.onmessage = (event) => {
       const serializedData = JSON.parse(event.data);
-      if (serializedData.type === WidgetEventTypes.NEW_MESSAGE_FROM_CLIENT) {
+      if (serializedData.type === WidgetEventTypes.NEW_MESSAGE_FROM_CLIENT || serializedData.type === ManagerWsEventTypes.NEW_MESSAGE_FROM_MANGER) {
         const incomingMessage: MessageResponse = serializedData.content;
         chatStore.handleNewMessageFromWebsocket(incomingMessage);
       } else if (serializedData.type === WidgetEventTypes.CLIENT_TYPING) {
@@ -48,7 +49,8 @@ export const useWebSocketStore = defineStore("websocket", () => {
 
   function sendMessage(message: MessageCreate) {
     if (socket.value?.readyState === WebSocket.OPEN) {
-      socket.value.send(JSON.stringify({ message: message }));
+      const eventToSend = {"type": ManagerWsEventTypes.NEW_MESSAGE_FROM_MANGER, "content": message}
+      socket.value.send(JSON.stringify(eventToSend));
     }
   }
 

@@ -17,15 +17,28 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
+import { MessageCreate, MessageType, ManagerWsEventTypes } from "@/client/backend";
+import { useChatStore } from "@/stores/chat";
 import { SendOutline } from "@vicons/ionicons5";
 import { useWebSocketStore } from "@/stores/websocket";
 const message = useMessage();
 const message_text = ref("");
 const webSocketStore = useWebSocketStore();
+const chatStore = useChatStore();
 
 async function sendMessage() {
+  if (!chatStore.selectedChat) {
+    message.error("No chat selected");
+    return;
+  }
+
+  const newMessage: MessageCreate = {
+    content: message_text.value,
+    chat_uuid: chatStore.selectedChat?.uuid,
+    message_type: MessageType.TEXT,
+  };
   if (message_text.value.trim() !== "") {
-    webSocketStore.sendMessage(message_text.value);
+    webSocketStore.sendMessage(newMessage);
     message.success("Message sent:");
     message_text.value = "";
   } else {

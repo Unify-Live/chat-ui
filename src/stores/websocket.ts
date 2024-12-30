@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useChatStore } from "@/stores/chat";
+import { getWsUrl } from "@/appConfig";
 import {
   MessageCreate,
   WidgetEventTypes,
@@ -50,7 +51,7 @@ export const useWebSocketStore = defineStore("websocket", () => {
     // Clear any existing connection
     disconnect();
 
-    socket.value = new WebSocket("ws://localhost:5000/managers/ws", [token]);
+    socket.value = new WebSocket(`${getWsUrl()}/managers/ws`, [token]);
 
     socket.value.onopen = () => {
       console.log("WebSocket Connected");

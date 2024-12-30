@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Possible message statuses during delivery lifecycle.
+ * Message delivery statuses.
  */
 export enum MessageStatus {
   SENDING = "sending",

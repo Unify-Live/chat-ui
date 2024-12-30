@@ -8,6 +8,7 @@
       />
       <div v-else class="empty-state">No dialog selected.</div>
     </div>
+    Typing: {{ chatStore.clientTypingText }}
     <ChatInput />
   </div>
 </template>
@@ -33,21 +34,6 @@ const props = defineProps({
 
 onMounted(() => {
   chatStore.fetchMessagesList(props.selectedChatUuid);
-});
-
-// Refs
-
-// Methods
-const scrollToBottom = () => {
-  const messagesContainer = messagesRef.value;
-  if (messagesContainer) {
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
-};
-
-// If you need to expose methods to parent components
-defineExpose({
-  scrollToBottom,
 });
 </script>
 

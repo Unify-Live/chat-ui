@@ -4,27 +4,27 @@
 /* eslint-disable */
 import type { MessageType } from "./MessageType";
 /**
- * Schema for creating a new message in the system.
+ * Schema for creating a new message.
  */
 export type MessageCreate = {
   /**
-   * UUID of the chat where message should be sent
+   * Chat UUID
    */
   chat_uuid: string;
   /**
-   * Text content of the message
+   * Message content
    */
   content: string;
   /**
-   * Type of the message (text or file)
+   * Type of message
    */
   message_type?: MessageType;
   /**
-   * UUID of the message being replied to
-   */
-  reply_to_uuid?: string | null;
-  /**
-   * Message ID in external system (e.g., Telegram message ID)
+   * External system message ID
    */
   external_id?: string | null;
+  /**
+   * UUID of message being replied to
+   */
+  reply_to_uuid?: string | null;
 };

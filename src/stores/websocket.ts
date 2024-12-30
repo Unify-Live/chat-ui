@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { MessageResponse } from "@/client/backend";
+import { useChatStore } from "@/stores/chat";
+import { WidgetClientTypingPayload } from "@/client/backend";
 
 export const useWebSocketStore = defineStore("websocket", () => {
   const socket = ref<WebSocket | null>(null);
-  const messages = ref<string[]>([]);
+  const chatStore = useChatStore();
   const isConnected = ref(false);
 
   function connect(token: string) {
     // Using the existing backend WebSocket endpoint
-    socket.value = new WebSocket("ws://localhost:5000/users/ws", [token]);
+    socket.value = new WebSocket("ws://localhost:5000/managers/ws", [token]);
     // Add token to headers
     socket.value.onopen = () => {
       console.log("WebSocket Connected");
@@ -16,7 +19,16 @@ export const useWebSocketStore = defineStore("websocket", () => {
     };
 
     socket.value.onmessage = (event) => {
-      messages.value.push(event.data);
+      const serializedData = JSON.parse(event.data);
+      if (serializedData.type === "new_message") {
+        const incomingMessage: MessageResponse = serializedData.content;
+        chatStore.handleNewMessageFromWebsocket(incomingMessage);
+      } else if (serializedData.type === "typing") {
+        const typingPayload: WidgetClientTypingPayload = serializedData.content;
+        chatStore.handleClientTypingText(typingPayload);
+      }
+
+      // console.log("WebSocket Message:", event);
     };
 
     socket.value.onclose = () => {
@@ -45,7 +57,6 @@ export const useWebSocketStore = defineStore("websocket", () => {
 
   return {
     isConnected,
-    messages,
     connect,
     sendMessage,
     disconnect,

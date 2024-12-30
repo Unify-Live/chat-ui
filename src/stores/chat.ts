@@ -8,6 +8,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { ChatResponse } from "@/client/backend/models/ChatResponse";
 import { MessageResponse } from "@/client/backend/models/MessageResponse";
+import { WidgetClientTypingPayload } from "@/client/backend";
 
 OpenAPI.BASE = getBackendUrl();
 OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
@@ -17,6 +18,8 @@ export const useChatStore = defineStore("chatStore", () => {
   const messagesList = ref<MessageResponse[]>([]);
   const chatOpened = ref(false);
   const selectedChat = ref<ChatResponse | null>(null);
+  const clientTyping = ref(false);
+  const clientTypingText = ref("");
 
   OpenAPI.BASE = getBackendUrl();
   OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
@@ -41,9 +44,29 @@ export const useChatStore = defineStore("chatStore", () => {
     }
   }
 
+  function handleNewMessageFromWebsocket(message: MessageResponse) {
+    if (selectedChat.value && selectedChat.value.uuid === message.chat_uuid) {
+      messagesList.value.push(message);
+    }
+  }
+
+  function handleClientTypingText(typingEvent: WidgetClientTypingPayload) {
+    if (
+      selectedChat.value &&
+      selectedChat.value.uuid === typingEvent.chat_uuid
+    ) {
+      clientTyping.value = typingEvent.is_typing;
+      clientTypingText.value = typingEvent.text_typed || "";
+    }
+  }
+
   return {
     chatList,
     selectedChat,
+    clientTyping,
+    clientTypingText,
+    handleClientTypingText,
+    handleNewMessageFromWebsocket,
     fetchChats,
     messagesList,
     chatOpened,

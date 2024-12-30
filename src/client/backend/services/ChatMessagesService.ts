@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MessageAttachment } from "../models/MessageAttachment";
+import type { AttachmentCreate } from "../models/AttachmentCreate";
+import type { AttachmentResponse } from "../models/AttachmentResponse";
 import type { MessageCreate } from "../models/MessageCreate";
 import type { MessageResponse } from "../models/MessageResponse";
 import type { MessageStatus } from "../models/MessageStatus";
@@ -162,7 +163,7 @@ export class ChatMessagesService {
    * @param fileType Type of file
    * @param fileUrl URL to file
    * @param fileName Original filename
-   * @returns MessageAttachment Successful Response
+   * @returns AttachmentCreate Successful Response
    * @throws ApiError
    */
   public static addMessageAttachment(
@@ -170,7 +171,7 @@ export class ChatMessagesService {
     fileType: string,
     fileUrl: string,
     fileName?: string | null,
-  ): CancelablePromise<MessageAttachment> {
+  ): CancelablePromise<AttachmentCreate> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/chat/messages/{message_uuid}/attachments",
@@ -194,12 +195,12 @@ export class ChatMessagesService {
    * Get attachments
    * Get all attachments for message
    * @param messageUuid
-   * @returns MessageAttachment Successful Response
+   * @returns AttachmentResponse Successful Response
    * @throws ApiError
    */
   public static getMessageAttachments(
     messageUuid: string,
-  ): CancelablePromise<Array<MessageAttachment>> {
+  ): CancelablePromise<Array<AttachmentResponse>> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/chat/messages/{message_uuid}/attachments",

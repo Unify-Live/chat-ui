@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Available message types in the system.
+ * Message types.
  */
 export enum MessageType {
   TEXT = "text",

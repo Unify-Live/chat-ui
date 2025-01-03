@@ -1,4 +1,7 @@
 /* styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Base styles and CSS variables */
 :root {
@@ -145,37 +148,4 @@ button:focus-visible {
 
 .message-card.manager {
   margin-right: auto;
-}
-
-/* Light theme */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .project-view {
-    flex-direction: column;
-  }
-
-  .dialog-list,
-  .chat-window {
-    width: 100%;
-    height: var(--content-height);
-  }
-
-  .dialog-list.chat-open {
-    display: none;
-  }
 }

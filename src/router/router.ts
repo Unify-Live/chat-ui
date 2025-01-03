@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ProjectsView from "../views/ProjectsView.vue";
 import Profile from "../views/Profile.vue";
-import ProjectView from "../views/ProjectView.vue";
+import GlobalProjectView from "../views/GlobalProjectView.vue";
 import AuthCallbackView from "../views/AuthCallbackView.vue";
 import type { RouteLocationNormalized } from "vue-router";
 
@@ -21,7 +21,7 @@ const routes = [
   {
     path: "/project/:id",
     name: "project",
-    component: ProjectView,
+    component: GlobalProjectView,
     meta: { requiresAuth: true },
   },
   {

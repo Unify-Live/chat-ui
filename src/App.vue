@@ -16,64 +16,6 @@
             <n-space vertical>
               <div class="app-container">
                 <n-layout>
-                  <n-layout-header
-                    class="header"
-                    :bordered="userStore.darkMode"
-                  >
-                    <div class="header-content">
-                      <!-- {/* Left section */} -->
-                      <div class="header-left"></div>
-
-                      <!-- {/* Center section - title */} -->
-                      <div class="header-center">
-                        <span class="page-title" style="color: #ffffff">
-                          Unify Live
-                        </span>
-                      </div>
-
-                      <!-- {/* Right section - user controls */} -->
-                      <div class="header-right">
-                        <n-switch
-                          v-model:value="userStore.darkMode"
-                          @update:value="userStore.setDarkMode"
-                          size="large"
-                        >
-                          <template #checked-icon>
-                            <n-icon :component="DarkModeTwotone" />
-                          </template>
-                          <template #unchecked-icon>
-                            <n-icon :component="WbSunnyTwotone" />
-                          </template>
-                        </n-switch>
-
-                        <n-dropdown
-                          v-if="userStore.user.loggedIn"
-                          :options="userDropdownOptions"
-                          @select="onUserDropdownSelect"
-                          placement="bottom-end"
-                        >
-                          <n-button
-                            class="user-button"
-                            id="username"
-                            round
-                            :theme-overrides="
-                              userStore.darkMode
-                                ? menuButtonThemeOverridesDark
-                                : menuButtonThemeOverridesLight
-                            "
-                          >
-                            <span style="margin: 4px">{{
-                              userStore.user.username
-                            }}</span>
-                            <n-icon class="">
-                              <Person />
-                            </n-icon>
-                          </n-button>
-                        </n-dropdown>
-                      </div>
-                    </div>
-                  </n-layout-header>
-
                   <n-layout-content class="content">
                     <div class="content-container">
                       <router-view></router-view>
@@ -92,13 +34,10 @@
 
 <script setup lang="ts">
 import { themeOverridesLight, themeOverridesDark } from "./globalTheme";
-import { menuButtonThemeOverridesDark } from "./globalTheme";
-import { menuButtonThemeOverridesLight } from "./globalTheme";
 import { h, Component, onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useWebSocketStore } from "@/stores/websocket";
-import { DarkModeTwotone, WbSunnyTwotone } from "@vicons/material";
-import { LogOutOutline, Person } from "@vicons/ionicons5";
+import { LogOutOutline } from "@vicons/ionicons5";
 import { darkTheme, DropdownOption, NIcon } from "naive-ui";
 import { useRouter } from "vue-router";
 

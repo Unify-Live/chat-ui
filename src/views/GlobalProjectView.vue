@@ -1,6 +1,7 @@
 <template>
   <n-layout has-sider>
     <!-- Desktop Sidebar - hidden on mobile -->
+
     <n-layout-sider
       bordered
       :collapsed="false"
@@ -8,20 +9,27 @@
       class="hidden md:block bg-gray-50 border-r"
     >
       <nav class="p-4">
+        <button class="inline-flex items-center justify-center p-2 rounded-lg">
+          <UnifyLogo class="" />
+        </button>
+
         <n-float-button-group
           vertical
           position="fixed"
-          :style="{ left: '24px', top: '15%', transform: 'translateY(-50%)' }"
+          :style="{ left: '25px', top: '23%', transform: 'translateY(-50%)' }"
         >
-
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <div 
-                class="p-2 cursor-pointer"
-                :class="activeView === ProjectDetailsView ? 'text-primary' : 'text-gray-600'"
+              <div
+                class="p-2 cursor-pointer hover:opacity-80"
+                :class="
+                  activeView === ProjectDetailsView
+                    ? 'text-primary'
+                    : 'text-gray-600'
+                "
                 @click="setActiveView(ProjectDetailsView)"
               >
-                <n-icon size="24">
+                <n-icon size="25">
                   <Document />
                 </n-icon>
               </div>
@@ -30,12 +38,14 @@
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <div 
-                class="p-2 cursor-pointer"
-                :class="activeView === ChatView ? 'text-primary' : 'text-gray-600'"
+              <div
+                class="p-2 cursor-pointer hover:opacity-80"
+                :class="
+                  activeView === ChatView ? 'text-primary' : 'text-gray-600'
+                "
                 @click="setActiveView(ChatView)"
               >
-                <n-icon size="24">
+                <n-icon size="25">
                   <ChatbubbleEllipses />
                 </n-icon>
               </div>
@@ -44,12 +54,16 @@
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <div 
-                class="p-2 cursor-pointer"
-                :class="activeView === IntegrationsView ? 'text-primary' : 'text-gray-600'"
+              <div
+                class="p-2 cursor-pointer hover:opacity-80"
+                :class="
+                  activeView === IntegrationsView
+                    ? 'text-primary'
+                    : 'text-gray-600'
+                "
                 @click="setActiveView(IntegrationsView)"
               >
-                <n-icon size="24">
+                <n-icon size="25">
                   <Settings />
                 </n-icon>
               </div>
@@ -58,12 +72,14 @@
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <div 
+              <div
                 class="p-2 cursor-pointer"
-                :class="activeView === Profile ? 'text-primary' : 'text-gray-600'"
+                :class="
+                  activeView === Profile ? 'text-primary' : 'text-gray-600'
+                "
                 @click="setActiveView(Profile)"
               >
-                <n-icon size="24">
+                <n-icon size="25">
                   <People />
                 </n-icon>
               </div>
@@ -86,8 +102,26 @@
             :class="{ 'text-green-500': activeView === ChatView }"
             @click="setActiveView(ChatView)"
           >
-            <n-icon>
+            <n-icon size="25">
               <ChatbubbleEllipses />
+            </n-icon>
+          </button>
+          <button
+            class="flex flex-col items-center p-2"
+            :class="{ 'text-green-500': activeView === Profile }"
+            @click="setActiveView(Profile)"
+          >
+            <n-icon size="25">
+              <People />
+            </n-icon>
+          </button>
+          <button
+            class="flex flex-col items-center p-2"
+            :class="{ 'text-green-500': activeView === IntegrationsView }"
+            @click="setActiveView(IntegrationsView)"
+          >
+            <n-icon size="25">
+              <Settings />
             </n-icon>
           </button>
         </nav>
@@ -101,19 +135,16 @@ import { ref, computed } from "vue";
 import {
   ChatbubbleEllipses,
   Settings,
-  Analytics,
   People,
-  Cog,
   Document,
-  Checkmark,
-  Calendar,
 } from "@vicons/ionicons5";
-import type { Component, DefineComponent } from "vue";
+import type { DefineComponent } from "vue";
 import ChatView from "@/views/ChatView.vue";
 import Profile from "@/views/Profile.vue";
 import ProjectDetailsView from "@/views/ProjectDetailsView.vue";
 import IntegrationsView from "@/views/IntegrationsView.vue";
 import { useRoute } from "vue-router";
+import UnifyLogo from "../components/logos/UnifyLogo.vue";
 
 type AnyComponent = DefineComponent<any, any, any>;
 

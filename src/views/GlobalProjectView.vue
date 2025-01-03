@@ -16,7 +16,9 @@
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
               <n-float-button
-                :type="activeView === ProjectDetailsView ? 'primary' : 'default'"
+                :type="
+                  activeView === ProjectDetailsView ? 'primary' : 'default'
+                "
                 @click="setActiveView(ProjectDetailsView)"
               >
                 <n-icon>
@@ -57,7 +59,7 @@
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
               <n-float-button
-              :type="activeView === Profile ? 'primary' : 'default'"
+                :type="activeView === Profile ? 'primary' : 'default'"
                 @click="setActiveView(Profile)"
               >
                 <n-icon>
@@ -80,7 +82,7 @@
         <nav class="flex justify-around p-2">
           <button
             class="flex flex-col items-center p-2"
-            :class="{'text-green-500': activeView === ChatView}"
+            :class="{ 'text-green-500': activeView === ChatView }"
             @click="setActiveView(ChatView)"
           >
             <n-icon>
@@ -90,7 +92,6 @@
         </nav>
       </div>
     </n-layout>
-
   </n-layout>
 </template>
 

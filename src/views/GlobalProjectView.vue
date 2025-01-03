@@ -13,59 +13,60 @@
           position="fixed"
           :style="{ left: '24px', top: '15%', transform: 'translateY(-50%)' }"
         >
+
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <n-float-button
-                :type="
-                  activeView === ProjectDetailsView ? 'primary' : 'default'
-                "
+              <div 
+                class="p-2 cursor-pointer"
+                :class="activeView === ProjectDetailsView ? 'text-primary' : 'text-gray-600'"
                 @click="setActiveView(ProjectDetailsView)"
               >
-                <n-icon>
+                <n-icon size="24">
                   <Document />
                 </n-icon>
-              </n-float-button>
+              </div>
             </template>
             Project Details
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <n-float-button
-                :type="activeView === ChatView ? 'primary' : 'default'"
+              <div 
+                class="p-2 cursor-pointer"
+                :class="activeView === ChatView ? 'text-primary' : 'text-gray-600'"
                 @click="setActiveView(ChatView)"
               >
-                <n-badge :value="100" :max="99" :offset="[6, -8]">
-                  <n-icon>
-                    <ChatbubbleEllipses />
-                  </n-icon>
-                </n-badge>
-              </n-float-button>
+                <n-icon size="24">
+                  <ChatbubbleEllipses />
+                </n-icon>
+              </div>
             </template>
             Chat
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <n-float-button
-                :type="activeView === IntegrationsView ? 'primary' : 'default'"
+              <div 
+                class="p-2 cursor-pointer"
+                :class="activeView === IntegrationsView ? 'text-primary' : 'text-gray-600'"
                 @click="setActiveView(IntegrationsView)"
               >
-                <n-icon>
+                <n-icon size="24">
                   <Settings />
                 </n-icon>
-              </n-float-button>
+              </div>
             </template>
             Integrations
           </n-tooltip>
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
-              <n-float-button
-                :type="activeView === Profile ? 'primary' : 'default'"
+              <div 
+                class="p-2 cursor-pointer"
+                :class="activeView === Profile ? 'text-primary' : 'text-gray-600'"
                 @click="setActiveView(Profile)"
               >
-                <n-icon>
+                <n-icon size="24">
                   <People />
                 </n-icon>
-              </n-float-button>
+              </div>
             </template>
             Profile
           </n-tooltip>

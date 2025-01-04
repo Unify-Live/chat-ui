@@ -124,6 +124,8 @@ import AnalyticsLogo from "@/components/logos/AnalyticsLogo.vue";
 import ChatsLogo from "@/components/logos/ChatsLogo.vue";
 import ContactsLogo from "@/components/logos/ContactsLogo.vue";
 import IntegrationsLogo from "@/components/logos/IntegrationsLogo.vue";
+import HomeLogo from "@/components/logos/HomeLogo.vue";
+import OpenMoreOptionsLogo from "@/components/logos/OpenMoreOptionsLogo.vue";
 import PaymentLogo from "@/components/logos/PaymentLogo.vue";
 import Profile from "@/views/Profile.vue";
 import ProjectDetailsView from "@/views/ProjectDetailsView.vue";
@@ -141,7 +143,7 @@ const projectId = computed(() => route.params.id as string);
 const activeView = ref<AnyComponent>(ProjectDetailsView);
 
 const navItems = [
-  { component: ProjectDetailsView, icon: Document, label: "Деталі проекту" },
+  { component: ProjectDetailsView, icon: HomeLogo, label: "Деталі проекту" },
   { component: ChatView, icon: ChatsLogo, label: "Чати" },
   { component: IntegrationsView, icon: IntegrationsLogo, label: "Інтеграції" },
   { component: ProjectDetailsView, icon: AnalyticsLogo, label: "Аналітика" },
@@ -150,9 +152,10 @@ const navItems = [
 ];
 
 const mobileNavItems = [
+  { component: ProjectDetailsView, icon: HomeLogo },
   { component: ChatView, icon: ChatsLogo },
-  { component: Profile, icon: People },
-  { component: IntegrationsView, icon: SettingsLogo },
+  { component: IntegrationsView, icon: PaymentLogo },
+  { component: ProjectDetailsView, icon: OpenMoreOptionsLogo },
 ];
 
 const componentProps = computed(() => ({

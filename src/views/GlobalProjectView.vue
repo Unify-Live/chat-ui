@@ -1,10 +1,11 @@
 <template>
-  <n-layout has-sider>
+  <n-layout has-sider class="h-screen">
+    <!-- Fixed sidebar -->
     <n-layout-sider
       bordered
       :collapsed="false"
       :width="80"
-      class="hidden md:block tall:hidden bg-white border-r"
+      class="fixed left-0 top-0 h-full hidden md:block tall:hidden bg-white border-r"
     >
       <nav class="h-full flex flex-col">
         <!-- Logo section -->
@@ -46,7 +47,6 @@
 
         <!-- Bottom section -->
         <div class="border-t p-4 flex flex-col gap-6">
-          <!-- Notifications button - it's have a bage with notifications number and calling function when pressed -->
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
               <div
@@ -87,12 +87,15 @@
       </nav>
     </n-layout-sider>
 
-    <n-layout>
-      <n-layout-content class="p-6">
-        <component :is="activeView" v-bind="componentProps" />
-      </n-layout-content>
+    <!-- Main content with scrollbar -->
+    <n-layout :style="{ marginLeft: '80px' }" class="min-h-screen">
+      <n-scrollbar class="h-screen">
+        <n-layout-content class="p-6">
+          <component :is="activeView" v-bind="componentProps" />
+        </n-layout-content>
+      </n-scrollbar>
 
-      <!-- Mobile nav remains unchanged -->
+      <!-- Mobile nav -->
       <div
         class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden tall:block"
       >
@@ -117,7 +120,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import NotificationsLogo from "@/components/logos/NotificationsLogo.vue";
-import { People, Document } from "@vicons/ionicons5";
 import type { DefineComponent } from "vue";
 import ChatView from "@/views/ChatView.vue";
 import AnalyticsLogo from "@/components/logos/AnalyticsLogo.vue";
@@ -132,7 +134,6 @@ import ProjectDetailsView from "@/views/ProjectDetailsView.vue";
 import IntegrationsView from "@/views/IntegrationsView.vue";
 import { useRoute } from "vue-router";
 import UnifyLogo from "../components/logos/UnifyLogo.vue";
-import SettingsLogo from "../components/logos/SettingsLogo.vue";
 import { UseMessage } from "naive-ui";
 
 type AnyComponent = DefineComponent<any, any, any>;

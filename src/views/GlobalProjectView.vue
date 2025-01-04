@@ -4,11 +4,11 @@
       bordered
       :collapsed="false"
       :width="80"
-      class="hidden md:block tall:hidden bg-white border-r border-gray-200"
+      class="hidden md:block tall:hidden bg-white border-r"
     >
       <nav class="h-full flex flex-col">
         <!-- Logo section -->
-        <div class="p-3.5 border-b border-gray-200">
+        <div class="p-3.5 border-b">
           <UnifyLogo class="w-13 h-14" />
         </div>
 

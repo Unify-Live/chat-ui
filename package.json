@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "webpack --config webpack.config.js",
+    "serve": "serve -s dist",
     "prettier": "prettier --write .",
-    "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "generate-client": "openapi -i http://localhost:5000/api/openapi.json -o src/client/backend"
   },
@@ -30,13 +31,19 @@
     "@types/webpack": "^5.28.5",
     "@vitejs/plugin-vue": "^5.1.4",
     "autoprefixer": "^10.4.20",
+    "compression-webpack-plugin": "^11.1.0",
+    "mini-css-extract-plugin": "^2.9.2",
     "openapi-typescript-codegen": "^0.29.0",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "rollup": "^4.27.3",
+    "serve": "^14.2.4",
     "tailwindcss": "^3.4.15",
+    "terser-webpack-plugin": "^5.3.11",
     "typescript": "~5.6.2",
     "vite": "^5.4.10",
-    "vue-tsc": "^2.1.8"
+    "vue-tsc": "^2.1.8",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   }
 }

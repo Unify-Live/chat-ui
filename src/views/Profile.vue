@@ -1,5 +1,5 @@
 <template>
-  <div class="m-auto max-w-85" id="main">
+  <div class="m-auto" id="main">
     <UserPersonalData> </UserPersonalData>
   </div>
 </template>

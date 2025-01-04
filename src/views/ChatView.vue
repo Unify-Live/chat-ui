@@ -24,7 +24,7 @@ const chatStore = useChatStore();
 const props = defineProps({
   projectId: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 

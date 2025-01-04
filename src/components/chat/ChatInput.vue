@@ -17,10 +17,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import {
-  MessageCreate,
-  MessageType,
-} from "@/client/backend";
+import { MessageCreate, MessageType } from "@/client/backend";
 import { useChatStore } from "@/stores/chat";
 import { SendOutline } from "@vicons/ionicons5";
 import { useWebSocketStore } from "@/stores/websocket";

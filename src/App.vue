@@ -14,68 +14,10 @@
             :duration="6000"
           >
             <n-space vertical>
-              <div class="app-container">
+              <div class="">
                 <n-layout>
-                  <n-layout-header
-                    class="header"
-                    :bordered="userStore.darkMode"
-                  >
-                    <div class="header-content">
-                      <!-- {/* Left section */} -->
-                      <div class="header-left"></div>
-
-                      <!-- {/* Center section - title */} -->
-                      <div class="header-center">
-                        <span class="page-title" style="color: #ffffff">
-                          Unify Live
-                        </span>
-                      </div>
-
-                      <!-- {/* Right section - user controls */} -->
-                      <div class="header-right">
-                        <n-switch
-                          v-model:value="userStore.darkMode"
-                          @update:value="userStore.setDarkMode"
-                          size="large"
-                        >
-                          <template #checked-icon>
-                            <n-icon :component="DarkModeTwotone" />
-                          </template>
-                          <template #unchecked-icon>
-                            <n-icon :component="WbSunnyTwotone" />
-                          </template>
-                        </n-switch>
-
-                        <n-dropdown
-                          v-if="userStore.user.loggedIn"
-                          :options="userDropdownOptions"
-                          @select="onUserDropdownSelect"
-                          placement="bottom-end"
-                        >
-                          <n-button
-                            class="user-button"
-                            id="username"
-                            round
-                            :theme-overrides="
-                              userStore.darkMode
-                                ? menuButtonThemeOverridesDark
-                                : menuButtonThemeOverridesLight
-                            "
-                          >
-                            <span style="margin: 4px">{{
-                              userStore.user.username
-                            }}</span>
-                            <n-icon class="">
-                              <Person />
-                            </n-icon>
-                          </n-button>
-                        </n-dropdown>
-                      </div>
-                    </div>
-                  </n-layout-header>
-
                   <n-layout-content class="content">
-                    <div class="content-container">
+                    <div class="">
                       <router-view></router-view>
                     </div>
                   </n-layout-content>
@@ -92,13 +34,10 @@
 
 <script setup lang="ts">
 import { themeOverridesLight, themeOverridesDark } from "./globalTheme";
-import { menuButtonThemeOverridesDark } from "./globalTheme";
-import { menuButtonThemeOverridesLight } from "./globalTheme";
 import { h, Component, onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useWebSocketStore } from "@/stores/websocket";
-import { DarkModeTwotone, WbSunnyTwotone } from "@vicons/material";
-import { LogOutOutline, Person } from "@vicons/ionicons5";
+import { LogOutOutline } from "@vicons/ionicons5";
 import { darkTheme, DropdownOption, NIcon } from "naive-ui";
 import { useRouter } from "vue-router";
 
@@ -133,77 +72,5 @@ async function onUserDropdownSelect(key: string) {
   }
 }
 </script>
-<style>
-.max-w-85 {
-  max-width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
 
-<style scoped>
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: 56px; /* equivalent to h-14 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  padding: 0 16px; /* equivalent to px-4 */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.header-left {
-  width: 100px;
-}
-
-.header-center {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.header-right {
-  width: 100px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-}
-
-.page-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.user-button {
-  padding: 8px;
-}
-
-.content {
-  flex-grow: 1;
-}
-
-@media (max-width: 640px) {
-  .page-title {
-    font-size: 1rem;
-  }
-
-  .header-content {
-    padding: 0 8px;
-  }
-}
-</style>
+<style scoped></style>

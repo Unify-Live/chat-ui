@@ -4,23 +4,32 @@
       bordered
       :collapsed="false"
       :width="80"
-      class="hidden md:block bg-white border-r border-gray-200"
+      class="hidden md:block tall:hidden bg-white border-r border-gray-200"
     >
       <nav class="h-full flex flex-col">
         <!-- Logo section -->
         <div class="p-3.5 border-b border-gray-200">
           <UnifyLogo class="w-13 h-14" />
         </div>
-        
+
         <!-- Navigation buttons -->
         <div class="flex-1 px-4 pt-6 flex flex-col">
           <!-- Top buttons section -->
           <div class="flex flex-col gap-8">
-            <n-tooltip trigger="hover" placement="right" v-for="(item, index) in navItems" :key="index">
+            <n-tooltip
+              trigger="hover"
+              placement="right"
+              v-for="(item, index) in navItems"
+              :key="index"
+            >
               <template #trigger>
                 <button
                   class="w-full h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors"
-                  :class="activeView === item.component ? 'text-primary' : 'text-gray-600'"
+                  :class="
+                    activeView === item.component
+                      ? 'text-primary'
+                      : 'text-gray-600'
+                  "
                   @click="setActiveView(item.component)"
                 >
                   <n-icon size="24">
@@ -35,11 +44,8 @@
           <div class="flex-1"></div>
         </div>
 
-
-        
         <!-- Bottom section -->
         <div class="border-t p-4 flex flex-col gap-6">
-          
           <!-- Notifications button - it's have a bage with notifications number and calling function when pressed -->
           <n-tooltip trigger="hover" placement="right">
             <template #trigger>
@@ -68,14 +74,15 @@
                 "
                 @click="setActiveView(Profile)"
               >
-                <n-image width="25" src="https://i.pravatar.cc/300" preview-disabled/>
-                
+                <n-image
+                  width="25"
+                  src="https://i.pravatar.cc/300"
+                  preview-disabled
+                />
               </div>
             </template>
             Мій профіль
           </n-tooltip>
-
-          
         </div>
       </nav>
     </n-layout-sider>
@@ -84,9 +91,11 @@
       <n-layout-content class="p-6">
         <component :is="activeView" v-bind="componentProps" />
       </n-layout-content>
-      
+
       <!-- Mobile nav remains unchanged -->
-      <div class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden">
+      <div
+        class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden tall:block"
+      >
         <nav class="flex justify-around p-2">
           <button
             v-for="(item, index) in mobileNavItems"
@@ -124,27 +133,26 @@ import UnifyLogo from "../components/logos/UnifyLogo.vue";
 import SettingsLogo from "../components/logos/SettingsLogo.vue";
 import { UseMessage } from "naive-ui";
 
-
 type AnyComponent = DefineComponent<any, any, any>;
 
-const message = useMessage(); 
+const message = useMessage();
 const route = useRoute();
 const projectId = computed(() => route.params.id as string);
 const activeView = ref<AnyComponent>(ProjectDetailsView);
 
 const navItems = [
-  { component: ProjectDetailsView, icon: Document, label: 'Деталі проекту' },
-  { component: ChatView, icon: ChatsLogo, label: 'Чати' },
-  { component: IntegrationsView, icon: IntegrationsLogo, label: 'Інтеграції' },
-  { component: ProjectDetailsView, icon: AnalyticsLogo, label: 'Аналітика' },
-  { component: ProjectDetailsView, icon: ContactsLogo, label: 'Контакти' },
-  { component: ProjectDetailsView, icon: PaymentLogo, label: 'Оплата' }
+  { component: ProjectDetailsView, icon: Document, label: "Деталі проекту" },
+  { component: ChatView, icon: ChatsLogo, label: "Чати" },
+  { component: IntegrationsView, icon: IntegrationsLogo, label: "Інтеграції" },
+  { component: ProjectDetailsView, icon: AnalyticsLogo, label: "Аналітика" },
+  { component: ProjectDetailsView, icon: ContactsLogo, label: "Контакти" },
+  { component: ProjectDetailsView, icon: PaymentLogo, label: "Оплата" },
 ];
 
 const mobileNavItems = [
   { component: ChatView, icon: ChatsLogo },
   { component: Profile, icon: People },
-  { component: IntegrationsView, icon: SettingsLogo }
+  { component: IntegrationsView, icon: SettingsLogo },
 ];
 
 const componentProps = computed(() => ({
@@ -170,6 +178,13 @@ const getNotifications = () => {
     padding-bottom: 4rem;
   }
 }
+@media (max-height: 600px) {
+  .n-layout-sider {
+    display: none;
+  }
 
-
+  .mobile-nav {
+    display: block;
+  }
+}
 </style>

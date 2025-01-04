@@ -73,7 +73,4 @@ async function onUserDropdownSelect(key: string) {
 }
 </script>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>

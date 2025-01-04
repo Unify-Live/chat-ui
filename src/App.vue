@@ -14,10 +14,10 @@
             :duration="6000"
           >
             <n-space vertical>
-              <div class="app-container">
+              <div class="">
                 <n-layout>
                   <n-layout-content class="content">
-                    <div class="content-container">
+                    <div class="">
                       <router-view></router-view>
                     </div>
                   </n-layout-content>
@@ -72,77 +72,8 @@ async function onUserDropdownSelect(key: string) {
   }
 }
 </script>
-<style>
-.max-w-85 {
-  max-width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
+
 
 <style scoped>
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: 56px; /* equivalent to h-14 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  padding: 0 16px; /* equivalent to px-4 */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.header-left {
-  width: 100px;
-}
-
-.header-center {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.header-right {
-  width: 100px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-}
-
-.page-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.user-button {
-  padding: 8px;
-}
-
-.content {
-  flex-grow: 1;
-}
-
-@media (max-width: 640px) {
-  .page-title {
-    font-size: 1rem;
-  }
-
-  .header-content {
-    padding: 0 8px;
-  }
-}
 </style>

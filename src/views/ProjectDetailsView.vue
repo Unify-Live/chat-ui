@@ -325,19 +325,24 @@
 
 <script setup lang="ts">
 import { useProjectsStore } from "@/stores/project";
-import { defineProps } from "vue";
 import { onMounted } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useMessage } from "naive-ui";
+import { useRouter } from "vue-router";
 
-const props = defineProps({
-  projectId: {
-    type: String,
-    required: true,
-  },
-});
-
+const router = useRouter();
+const message = useMessage();
 const projectsStore = useProjectsStore();
+const userStore = useUserStore();
 
 onMounted(() => {
-  projectsStore.fetchProject(props.projectId);
+  const projectSelectedUuid = userStore.getSelectedProjectUuid();
+  if (!projectSelectedUuid) {
+    message.warning("Ви не вибрали проект, виберіть його");
+    router.push("/projects");
+    return;
+  }
+  console.log("Project selected UUID", projectSelectedUuid);
+  projectsStore.fetchProject(projectSelectedUuid);
 });
 </script>

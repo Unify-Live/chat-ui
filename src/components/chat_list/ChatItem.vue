@@ -8,6 +8,7 @@
   >
     <n-space align="start" justify="space-between" :wrap="false">
       <!-- Left side with avatar and content -->
+
       <n-space :wrap="false">
         <n-space vertical :wrap="false">
           <span class="username">{{ chat.title }}</span>

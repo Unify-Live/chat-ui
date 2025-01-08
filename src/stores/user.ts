@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { Ref, ref } from "vue";
 import { jwtDecode } from "jwt-decode";
+import type { Router } from "vue-router";
 
 export interface UserData {
   loggedIn: boolean;
@@ -24,13 +25,33 @@ export const useUserStore = defineStore("user", () => {
   const user: Ref<UserData> = ref({
     loggedIn: false,
   });
-
+  const selectedProjectUuid = ref<string | null>(null);
   const darkMode: Ref<boolean> = ref(false);
+
+  function setSelectedProjectUuid(uuid: string) {
+    selectedProjectUuid.value = uuid;
+    localStorage.setItem("selectedProjectUuid", uuid);
+  }
+
+  function removeSelectedProjectUuid() {
+    selectedProjectUuid.value = null;
+    localStorage.removeItem("selectedProjectUuid");
+  }
+
+  function getSelectedProjectUuid() {
+    // First try to get from ref
+    if (!selectedProjectUuid.value) {
+      // Then try to get from localStorage
+      const storedUuid = localStorage.getItem("selectedProjectUuid");
+      selectedProjectUuid.value = storedUuid;
+    }
+
+    return selectedProjectUuid.value;
+  }
 
   function setUserFromToken(token: string) {
     try {
       const decodedToken = jwtDecode<JwtPayload>(token);
-
       user.value = {
         loggedIn: true,
         username: decodedToken.preferred_username || decodedToken.name,
@@ -39,8 +60,6 @@ export const useUserStore = defineStore("user", () => {
         token: token,
         uid: decodedToken.uid,
       };
-
-      // Store token in local storage
       localStorage.setItem("userToken", token);
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -70,5 +89,8 @@ export const useUserStore = defineStore("user", () => {
     removeUser,
     logout,
     setUserFromToken,
+    getSelectedProjectUuid,
+    setSelectedProjectUuid,
+    removeSelectedProjectUuid,
   };
 });

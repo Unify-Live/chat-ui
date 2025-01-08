@@ -40,6 +40,11 @@
   </n-modal>
 
   <div class="main" id="main">
+    <!-- Show selected project -->
+    <n-space justify="space-between" align="center" class="header-space">
+      Вибраний проект: {{ userStore.getSelectedProjectUuid() }}
+    </n-space>
+
     <n-space justify="space-between" align="center" class="header-space">
       <h1>Мої проекти</h1>
       <n-button @click="openModal" type="primary">
@@ -62,14 +67,17 @@
 
 <script setup lang="ts">
 import { onMounted, ref, h, Ref } from "vue";
+import { useUserStore } from "@/stores/user";
 import { useProjectsStore } from "@/stores/project";
 import { ProjectResponse } from "../client/backend/models/ProjectResponse";
 import { DataTableColumns } from "naive-ui";
 import { useMessage } from "naive-ui";
-import { Add } from "@vicons/ionicons5";
+import { Add, Checkmark } from "@vicons/ionicons5";
 import { RouterLink } from "vue-router";
+import { NButton, NIcon, NTag } from "naive-ui";
 
 const projectStore = useProjectsStore();
+const userStore = useUserStore();
 const isLoading = ref(false);
 const message = useMessage();
 const showModal: Ref<boolean> = ref(false);
@@ -123,6 +131,41 @@ const columns: DataTableColumns<ProjectResponse> = [
     sorter: "default",
     render: (row: ProjectResponse) => {
       return row.uuid;
+    },
+  },
+
+  // Action what is a button to select active project and put uuid into user store
+  {
+    key: "action",
+    title: "Виберіть проект",
+    align: "center",
+    render: (row: ProjectResponse) => {
+      return h(
+        NButton,
+        {
+          text: false,
+          quaternary: true,
+          round: true,
+          color: "green",
+          focusable: false,
+          disabled: row.uuid === userStore.getSelectedProjectUuid(),
+          onClick: () => {
+            userStore.setSelectedProjectUuid(row.uuid);
+          },
+        },
+        {
+          default: () =>
+            h(
+              NIcon,
+              {
+                size: 25,
+              },
+              {
+                default: () => h(Checkmark),
+              },
+            ),
+        },
+      );
     },
   },
 ];

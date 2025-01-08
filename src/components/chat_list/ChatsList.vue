@@ -1,4 +1,12 @@
 <template>
+  <n-space vertical>
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
+  </n-space>
   <n-virtual-list
     class="dialog-virtual-list"
     :items="chatStore.chatList"
@@ -17,10 +25,11 @@
 
 <script lang="ts" setup>
 import ChatItem from "./ChatItem.vue";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useChatStore } from "@/stores/chat";
 
 const chatStore = useChatStore();
+const isLoading = ref(true);
 
 const props = defineProps({
   projectId: {
@@ -31,22 +40,7 @@ const props = defineProps({
 
 onMounted(() => {
   chatStore.fetchChats(props.projectId);
+
+  isLoading.value = false;
 });
 </script>
-
-<style scoped>
-.dialog-virtual-list {
-  width: 100%;
-}
-
-.dialog-item {
-  box-sizing: border-box;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.dialog-item:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-}
-</style>

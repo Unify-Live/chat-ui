@@ -14,21 +14,19 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import ChatsList from "@/components/dialog/ChatsList.vue";
+import ChatsList from "@/components/chat_list/ChatsList.vue";
 import ChatWindow from "@/components/chat/ChatWindow.vue";
 import { useChatStore } from "@/stores/chat";
+import { useUserStore } from "@/stores/user";
+import { useMessage } from "naive-ui";
+import { useRouter } from "vue-router";
 
+const userStore = useUserStore();
+const message = useMessage();
+const router = useRouter();
 const chatStore = useChatStore();
 
-// Props
-const props = defineProps({
-  projectId: {
-    type: String,
-    required: true,
-  },
-});
-
-console.log(props.projectId);
+const projectId = userStore.getSelectedProjectUuid();
 
 onMounted(() => {});
 </script>

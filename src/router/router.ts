@@ -1,13 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ProjectsView from "../views/ProjectsView.vue";
-import Profile from "../views/Profile.vue";
-import GlobalProjectView from "../views/GlobalProjectView.vue";
-import AuthCallbackView from "../views/AuthCallbackView.vue";
+import ProjectsView from "@/views/ProjectsView.vue";
+import Profile from "@/views/Profile.vue";
+import ProjectDetailsView from "@/views/ProjectDetailsView.vue";
+import ChatView from "@/views/ChatView.vue";
+import AuthCallbackView from "@/views/AuthCallbackView.vue";
+import IntegrationsView from "@/views/IntegrationsView.vue";
+import AnalyticsView from "@/views/IntegrationsView.vue";
+import ContactsView from "@/views/Profile.vue";
+import PaymentView from "@/views/Profile.vue";
 import type { RouteLocationNormalized } from "vue-router";
 
 const routes = [
   {
-    path: "/",
+    path: "/projects",
     name: "projects",
     component: ProjectsView,
     meta: { requiresAuth: true },
@@ -19,9 +24,39 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/project/:id",
+    path: "/project-details",
     name: "project",
-    component: GlobalProjectView,
+    component: ProjectDetailsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/chat/",
+    name: "chat",
+    component: ChatView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/integrations",
+    name: "integrations",
+    component: IntegrationsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/analytics",
+    name: "analytics",
+    component: AnalyticsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/contacts",
+    name: "contacts",
+    component: ContactsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/payment",
+    name: "payment",
+    component: PaymentView,
     meta: { requiresAuth: true },
   },
   {
@@ -51,14 +86,17 @@ router.beforeEach((to, _, next) => {
   const isTokenExpiredResult = isTokenExpired(
     localStorage.getItem("userToken"),
   );
+
   if (to.path.startsWith("/authentik_callback")) {
     next();
     return;
   }
+
   if (!isTokenExpiredResult) {
     next();
     return;
   }
+
   if (to.meta.requiresAuth && isTokenExpiredResult) {
     window.location.href = return_auth_url();
     next(false);
@@ -66,7 +104,6 @@ router.beforeEach((to, _, next) => {
 });
 
 function isTokenExpired(token: string | null): boolean {
-  console.log(token);
   if (!token) return true;
   if (token === null) return true;
 

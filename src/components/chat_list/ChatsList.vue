@@ -1,24 +1,19 @@
 <template>
-  <n-space vertical>
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-    <n-skeleton v-if="isLoading" height="15px" width="100%" :repeat="6" />
-  </n-space>
   <n-virtual-list
-    class="dialog-virtual-list"
     :items="chatStore.chatList"
     :item-size="64"
     item-resizable
     :key-field="'id'"
-    style="max-height: 70vh"
   >
     <template #default="{ item: chat }">
-      <div class="dialog-item" :key="chat.id">
+      <n-card
+        hoverable
+        @click="openChat(chat)"
+        class="cursor-pointer"
+        :embedded="chatStore.selectedChat?.uuid === chat.uuid"
+      >
         <ChatItem :chat="chat" />
-      </div>
+      </n-card>
     </template>
   </n-virtual-list>
 </template>
@@ -27,16 +22,24 @@
 import ChatItem from "./ChatItem.vue";
 import { onMounted, ref } from "vue";
 import { useChatStore } from "@/stores/chat";
+import { ChatResponse } from "@/client/backend/models/ChatResponse";
 
 const chatStore = useChatStore();
 const isLoading = ref(true);
-
 const props = defineProps({
   projectId: {
     type: String,
     required: true,
   },
 });
+
+function openChat(chat: ChatResponse) {
+  chatStore.chatOpened = true;
+  chatStore.selectedChat = chat;
+  chatStore.clientTypingText = "";
+  chatStore.fetchMessagesList(chat.uuid);
+  console.log("Chat opened", chat);
+}
 
 onMounted(() => {
   chatStore.fetchChats(props.projectId);

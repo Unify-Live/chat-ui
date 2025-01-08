@@ -1,16 +1,13 @@
 <template>
-  <div class="chat-window">
-    <ChatHeader />
-    <div class="chat-content">
-      <MessageList
-        v-if="chatStore.chatOpened"
-        :messages="chatStore.messagesList"
-      />
-      <div v-else class="empty-state">No dialog selected.</div>
-    </div>
-    Typing: {{ chatStore.clientTypingText }}
-    <ChatInput />
+  <div>
+    <MessageList
+      v-if="chatStore.chatOpened"
+      :messages="chatStore.messagesList"
+    />
+    <div v-else>No dialog selected.</div>
   </div>
+  Typing: {{ chatStore.clientTypingText }}
+  <ChatInput />
 </template>
 
 <script setup>
@@ -36,31 +33,3 @@ onMounted(() => {
   chatStore.fetchMessagesList(props.selectedChatUuid);
 });
 </script>
-
-<style scoped>
-.chat-window {
-  display: flex;
-  flex-direction: column;
-  height: 90%;
-  border: 1px solid #ccc;
-}
-
-.chat-content {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-.empty-state {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #999;
-}
-
-.chat-input {
-  padding: 10px;
-  border-top: 1px solid #ccc;
-}
-</style>

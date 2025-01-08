@@ -1,41 +1,19 @@
 <template>
-  <n-card :bordered="false" hoverable size="small" @click="openChat(chat)">
-    <n-space align="start" justify="space-between" :wrap="false">
-      <!-- Left side with avatar and content -->
+  <n-badge value="telegram" color="grey">
+    <n-avatar round size="large" src="https://i.pravatar.cc/300" />
+    <template #value>
+      <!--Define custom Icon for badge what we have on avatar-->
+      <n-icon :component="AmericanFootballSharp" />
+    </template>
+  </n-badge>
 
-      <n-space :wrap="false">
-        <n-space vertical :wrap="false">
-          <span>{{ chat.title }}</span>
-          <span> LAST MESSAGE </span>
-        </n-space>
-      </n-space>
-
-      <!-- Right side -->
-      <n-space vertical align="end" :wrap="false">
-        <span>{{ chat.last_message_at }}</span>
-        <!-- <n-badge
-          v-if="dialog.unreadCount! > 0"
-          :value="dialog.unreadCount"
-          type="success"
-        /> -->
-      </n-space>
-    </n-space>
-  </n-card>
+  <span>{{ chat.title }}</span>
+  <span> LAST MESSAGE </span>
 </template>
 
 <script lang="ts" setup>
 import { ChatResponse } from "@/client/backend/models/ChatResponse";
-import { useChatStore } from "@/stores/chat";
-
-const chatStore = useChatStore();
-
-function openChat(chat: ChatResponse) {
-  chatStore.chatOpened = true;
-  chatStore.selectedChat = chat;
-  chatStore.clientTypingText = "";
-  chatStore.fetchMessagesList(chat.uuid);
-  console.log("Chat opened", chat);
-}
+import { AmericanFootballSharp } from "@vicons/ionicons5";
 
 defineProps<{
   chat: ChatResponse;

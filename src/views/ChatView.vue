@@ -1,21 +1,20 @@
 <template>
-  <div class="project-view">
-    <div class="dialog-list">
-      <div class="dialog-list-content">
-        <ChatsList :projectId="projectId" />
-      </div>
-    </div>
-
-    <div class="chat-window">
+  <n-space>
+    <n-card class="h-screen">
+      <ChatsList :projectId="projectId" />
+    </n-card>
+    <n-card class="h-screen">
+      <ChatHeader />
       <ChatWindow />
-    </div>
-  </div>
+    </n-card>
+  </n-space>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import ChatsList from "@/components/chat_list/ChatsList.vue";
 import ChatWindow from "@/components/chat/ChatWindow.vue";
+import ChatHeader from "@/components/chat/ChatHeader.vue";
 import { useChatStore } from "@/stores/chat";
 import { useUserStore } from "@/stores/user";
 import { useMessage } from "naive-ui";
@@ -30,18 +29,3 @@ const projectId = userStore.getSelectedProjectUuid();
 
 onMounted(() => {});
 </script>
-
-<style scoped>
-.project-view {
-  display: flex;
-  flex-direction: row;
-}
-
-.dialog-list {
-  width: 25%;
-}
-
-.chat-window {
-  width: 75%;
-}
-</style>

@@ -72,6 +72,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
   DataTable: {
     borderColor: transparentBlack,
   },
+  Card: {
+    colorEmbedded: paleGrey,
+  },
 };
 
 export const themeOverridesDark: GlobalThemeOverrides = {

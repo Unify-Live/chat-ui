@@ -42,7 +42,7 @@ const exchangeCodeForTokens = async (code) => {
       userStore.setUserFromToken(json_data["access_token"]);
       localStorage.setItem("userToken", json_data["access_token"]);
       localStorage.setItem("refreshToken", json_data["refresh_token"]);
-      router.push("/");
+      router.push("/projects");
       return json_data;
     }
   } catch (err) {

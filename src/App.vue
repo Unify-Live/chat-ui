@@ -110,11 +110,9 @@
 
                 <!-- Main content with scrollbar -->
                 <n-layout :style="{ marginLeft: '80px' }" class="min-h-screen">
-                  <n-scrollbar class="h-screen">
-                    <n-layout-content class="p-6">
-                      <router-view></router-view>
-                    </n-layout-content>
-                  </n-scrollbar>
+                  <n-layout-content class="p-6">
+                    <router-view></router-view>
+                  </n-layout-content>
 
                   <!-- Mobile nav -->
                   <div

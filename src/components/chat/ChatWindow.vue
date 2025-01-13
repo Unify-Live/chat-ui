@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex-1">
     <MessageList
       v-if="chatStore.chatOpened"
       :messages="chatStore.messagesList"

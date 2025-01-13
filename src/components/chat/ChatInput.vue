@@ -1,14 +1,14 @@
 <template>
-  <div class="chat-input">
+  <div class="p-4 flex gap-3 items-center border-t">
     <input
       v-model="message_text"
       type="text"
       placeholder="Type a message..."
-      class="message-input"
+      class="flex-1 rounded-md border p-2"
     />
-    <button @click="sendMessage" class="send-button">
-      <n-icon>
-        <SendOutline />
+    <button @click="sendMessage" class="bg-primary rounded-md size-7">
+      <n-icon size="">
+        <SendLogo />
       </n-icon>
     </button>
   </div>
@@ -18,9 +18,9 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { MessageCreate, MessageType } from "@/client/backend";
-import { useChatStore } from "@/stores/chat";
-import { SendOutline } from "@vicons/ionicons5";
 import { useWebSocketStore } from "@/stores/websocket";
+import { useChatStore } from "@/stores/chat";
+import SendLogo from "@/components/logos/SendLogo.vue";
 const message = useMessage();
 const message_text = ref("");
 const webSocketStore = useWebSocketStore();
@@ -53,7 +53,6 @@ async function sendMessage() {
   align-items: center;
   padding: 10px;
   border-top: 1px solid #ccc;
-  background-color: rgb(24, 24, 28);
 }
 
 .attachments-button,

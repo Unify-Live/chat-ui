@@ -1,13 +1,16 @@
 <template>
-  <n-space>
-    <n-card class="h-screen">
+  <div class="flex h-full">
+    <div class="flex-[0.2] border-r">
       <ChatsList :projectId="projectId" />
-    </n-card>
-    <n-card class="h-screen">
+    </div>
+    <div class="flex-[0.6] border-r flex flex-col">
       <ChatHeader />
       <ChatWindow />
-    </n-card>
-  </n-space>
+    </div>
+    <div class="flex-[0.2]">
+      <h1>Chat Details</h1>
+    </div>
+  </div>
 </template>
 
 <script setup>

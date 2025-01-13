@@ -6,6 +6,9 @@ export default {
       screens: {
         tall: { raw: "(max-height: 800px)" },
       },
+      colors: {
+        'primary': 'var(--color-primary)',
+      },
     },
   },
   plugins: [],

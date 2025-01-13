@@ -1,12 +1,11 @@
 <template>
-  <div class="flex-1">
+  <div class="flex-1 bg-[#E5E7EB]">
     <MessageList
       v-if="chatStore.chatOpened"
       :messages="chatStore.messagesList"
     />
     <div v-else>No dialog selected.</div>
   </div>
-  Typing: {{ chatStore.clientTypingText }}
   <ChatInput />
 </template>
 

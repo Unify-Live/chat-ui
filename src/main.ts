@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import App from "./App.vue";
+// import App from "./App.vue";
 import router from "./router/router";
 import "./style.css";
 
@@ -12,6 +12,7 @@ import {
   NNotificationProvider,
   NLoadingBarProvider,
 } from "naive-ui";
+import AppV2 from "./AppV2.vue";
 
 const naive = create({
   components: [
@@ -23,7 +24,7 @@ const naive = create({
   ],
 });
 
-const app = createApp(App);
+const app = createApp(AppV2);
 
 app.use(createPinia());
 app.use(router);

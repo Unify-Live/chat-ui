@@ -7,7 +7,7 @@
     </template>
   </n-badge>
 
-  <span>{{ chat.title }}</span>
+  <span class="ml-1">{{ chat.title }}</span>
   <span> LAST MESSAGE </span>
 </template>
 

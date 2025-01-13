@@ -1,9 +1,8 @@
 <template>
-  <div class="chat-header">
+  <div class="chat-header border-b">
     <div class="header-left">
       <div class="client-info">
         <h2 class="client-name">name</h2>
-        <span class="client-source">source</span>
       </div>
     </div>
     <div class="header-right">
@@ -39,8 +38,7 @@ const openSettings = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #ccc;
+  padding: 14px 16px;
 }
 
 .header-left {

@@ -8,7 +8,7 @@
       <ChatWindow />
     </div>
     <div class="flex-[0.2]">
-      <h1>Chat Details</h1>
+      <ChatDetails />
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ import { useChatStore } from "@/stores/chat";
 import { useUserStore } from "@/stores/user";
 import { useMessage } from "naive-ui";
 import { useRouter } from "vue-router";
+import ChatDetails from "@/components/chat_details/ChatDetails.vue";
 
 const userStore = useUserStore();
 const message = useMessage();

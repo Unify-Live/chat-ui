@@ -1,16 +1,19 @@
 <template>
-  <div class="p-4 flex gap-3 items-center border-t">
-    <input
-      v-model="message_text"
-      type="text"
-      placeholder="Type a message..."
-      class="flex-1 rounded-md border p-2"
-    />
-    <button @click="sendMessage" class="bg-primary rounded-md size-7">
-      <n-icon size="">
-        <SendLogo />
-      </n-icon>
-    </button>
+  <div class="border-t">
+    <p class="mt-2">Typing: {{ chatStore.clientTypingText }}</p>
+    <div class="p-4 flex gap-3 items-center">
+      <input
+        v-model="message_text"
+        type="text"
+        placeholder="Type a message..."
+        class="flex-1 rounded-md border p-2"
+      />
+      <button @click="sendMessage" class="bg-primary rounded-md size-7">
+        <n-icon size="">
+          <SendLogo />
+        </n-icon>
+      </button>
+    </div>
   </div>
 </template>
 

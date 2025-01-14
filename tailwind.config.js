@@ -8,6 +8,8 @@ export default {
       },
       colors: {
         'primary': 'var(--color-primary)',
+        'light-gray': 'var(--color-light-gray)',
+        'danger': 'var(--color-danger)',
       },
     },
   },

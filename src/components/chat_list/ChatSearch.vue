@@ -1,14 +1,14 @@
 <template>
   <!-- message search -->
 
-  <div class="m-4 border rounded-lg flex items-center gap-2 p-2">
+  <div class="m-4 flex items-center gap-2 rounded-lg border p-2">
     <n-icon :component="Search" size="18" color="#E5E7EB" />
 
     <input
       v-model="search_text"
       type="text"
       placeholder="Type a message..."
-      class="flex-1"
+      class="flex-1 outline-gray-300"
     />
   </div>
 
@@ -16,12 +16,12 @@
 
   <div>
     <n-scrollbar x-scrollable>
-      <div class="flex gap-4 p-4 max-w-72">
+      <div class="flex max-w-72 gap-4 p-4">
         <button
           v-for="filter in filters"
           :key="filter.name"
           @click="selected_filter = filter"
-          class="rounded-full py-1.5 px-3 bg-gray-100 w-fit whitespace-nowrap text-sm"
+          class="w-fit whitespace-nowrap rounded-full bg-gray-100 px-3 py-1.5 text-sm"
           :class="{
             '!bg-primary text-white': selected_filter === filter,
           }"

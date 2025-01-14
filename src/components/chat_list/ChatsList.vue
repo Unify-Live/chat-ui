@@ -1,8 +1,8 @@
 <template>
-  <div class="h-screen overflow-hidden">
+  <div class="grid h-screen grid-rows-[auto,1fr]">
     <ChatSearch />
 
-    <div class="h-screen">
+    <div class="overflow-y-auto">
       <n-virtual-list
         :items="chatStore.chatList"
         :item-size="64"
@@ -15,7 +15,7 @@
             @click="openChat(chat)"
             class="cursor-pointer"
             :class="{
-              'bg-[#E5E7EB]': chatStore.selectedChat?.uuid === chat.uuid,
+              'bg-light-gray': chatStore.selectedChat?.uuid === chat.uuid,
             }"
           >
             <ChatItem :chat="chat" />
@@ -28,10 +28,11 @@
 
 <script lang="ts" setup>
 import ChatItem from "./ChatItem.vue";
-import { onMounted, ref } from "vue";
 import { useChatStore } from "@/stores/chat";
 import { ChatResponse } from "@/client/backend/models/ChatResponse";
 import ChatSearch from "./ChatSearch.vue";
+import { onMounted } from "vue";
+import { ref } from "vue";
 
 const chatStore = useChatStore();
 const isLoading = ref(true);

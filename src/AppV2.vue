@@ -10,15 +10,19 @@
         <n-notification-provider>
           <n-loading-bar-provider>
             <div class="flex h-screen divide-y flex-col md:flex-row">
-              <AppHeader />
+              <!-- Mobile Header -->
+              <AppHeader v-if="!route.meta.hideHeader" />
 
+              <!-- Desk Nav -->
               <AppSidebar />
 
+              <!-- Main Content -->
               <main class="flex-1 overflow-y-auto">
                 <router-view />
               </main>
 
-              <AppBottomTab />
+              <!-- Mobile Nav -->
+              <AppBottomTab v-if="!route.meta.hideBottomNav" />
             </div>
           </n-loading-bar-provider>
         </n-notification-provider>
@@ -33,11 +37,13 @@ import { onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useWebSocketStore } from "@/stores/websocket";
 import { darkTheme } from "naive-ui";
+import { useRoute } from "vue-router";
 import AppSidebar from "./components/common/AppSidebar.vue";
 import AppBottomTab from "./components/common/AppBottomTab.vue";
 import AppHeader from "./components/common/AppHeader.vue";
 
 const userStore = useUserStore();
+const route = useRoute();
 const webSocketStore = useWebSocketStore();
 
 onMounted(() => {

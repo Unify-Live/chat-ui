@@ -1,5 +1,9 @@
 <template>
   <div class="chat-header border-b">
+    <button @click="router.go(-1)" class="md:hidden">
+      <n-icon :component="ChevronBack" size="18" />
+    </button>
+
     <div class="header-left">
       <div class="client-info">
         <h2 class="client-name">name</h2>
@@ -23,10 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import { SettingsOutline } from "@vicons/ionicons5";
+import { SettingsOutline, ChevronBack } from "@vicons/ionicons5";
 import { useMessage } from "naive-ui";
+import { useRouter } from "vue-router";
 
 const message = useMessage();
+const router = useRouter();
 
 const openSettings = () => {
   message.info("Settings clicked. Not yet implemented.");

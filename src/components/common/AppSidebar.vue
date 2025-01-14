@@ -1,23 +1,25 @@
 <template>
-  <div class="hidden md:flex flex-col border-r h-screen">
+  <div class="hidden h-screen flex-col border-r md:flex">
     <div class="px-3.5 py-1.5">
       <UnifyLogo mini />
     </div>
 
     <nav
-      class="flex flex-col items-center gap-9 py-6 px-4 flex-1 border-t overflow-y-auto"
+      class="flex flex-1 flex-col items-center gap-8 overflow-y-auto border-t px-4 py-6"
     >
       <router-link
         :to="item.route"
         v-slot="{ isActive }"
         v-for="item in navItems"
         :key="item.label"
+        class="*:focus-within:!outline-none"
       >
         <n-tooltip trigger="hover" placement="right">
           <template #trigger>
             <component
               :is="item.icon"
               :class="{ '*:fill-primary': isActive }"
+              class="w-8"
             />
           </template>
           {{ item.label }}
@@ -25,12 +27,12 @@
       </router-link>
     </nav>
 
-    <div class="flex flex-col gap-6 items-center p-4 border-t">
+    <div class="flex flex-col items-center gap-6 border-t p-4">
       <n-tooltip trigger="hover" placement="right">
         <template #trigger>
           <button @click="getNotifications">
             <n-badge :value="2" :offset="[6, -6]">
-              <n-icon size="24">
+              <n-icon size="20">
                 <NotificationsLogo />
               </n-icon>
             </n-badge>
@@ -59,7 +61,7 @@
               :class="isActive ? 'text-primary' : 'text-gray-600'"
             >
               <n-image
-                class="rounded-2xl bg-black !h-10 !w-8"
+                class="!h-10 !w-8 rounded-2xl bg-black"
                 src="https://i.pravatar.cc/300"
                 preview-disabled
               />

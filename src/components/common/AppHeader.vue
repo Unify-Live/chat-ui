@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center justify-between px-4 py-3 md:hidden">
+  <div class="flex items-center justify-between px-4 py-3 md:hidden bg-white">
     <UnifyLogo />
 
-    <div class="flex gap-6 items-center">
+    <div class="flex gap-6 items-center" v-if="!showCloseButton">
       <button @click="getNotifications">
         <n-badge :value="2" :offset="[-2, -2]">
           <n-icon size="20">
@@ -27,11 +27,25 @@
         </button>
       </router-link>
     </div>
+
+    <button @click="emit('close')" v-else>
+      <n-icon size="20">
+        <CloseOutline />
+      </n-icon>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { CloseOutline } from "@vicons/ionicons5";
+
 import UnifyLogo from "@/components/logos/UnifyLogoV2.vue";
+
+const { showCloseButton } = defineProps<{
+  showCloseButton?: boolean;
+}>();
+
+const emit = defineEmits(["close"]);
 
 const getNotifications = () => {
   console.log("Getting notifications");

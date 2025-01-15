@@ -3,7 +3,18 @@
     <BackButton path="/chat" />
     <div class="header-left">
       <div class="client-info">
-        <h2 class="client-name">name</h2>
+        <h2
+          class="client-name"
+          @click="
+            () => {
+              $router.push(
+                '/chat/' + chatStore.selectedChat?.uuid + '/details',
+              );
+            }
+          "
+        >
+          {{ chatStore.selectedChat?.title || "name" }}
+        </h2>
       </div>
     </div>
     <div class="header-right">
@@ -27,8 +38,10 @@
 import { SettingsOutline } from "@vicons/ionicons5";
 import { useMessage } from "naive-ui";
 import BackButton from "../common/BackButton.vue";
+import { useChatStore } from "@/stores/chat";
 
 const message = useMessage();
+const chatStore = useChatStore();
 
 const openSettings = () => {
   message.info("Settings clicked. Not yet implemented.");

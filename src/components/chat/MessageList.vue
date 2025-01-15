@@ -15,7 +15,16 @@
         </div>
       </template>
     </n-virtual-list>
-    <div v-else>No messages yet.</div>
+    <div
+      v-else
+      @click="
+        () => {
+          $router.push('/chat/' + chatStore.selectedChat?.uuid + '/details');
+        }
+      "
+    >
+      No messages yet.
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
-  <div class="space-y-4">
+  <div class="flex-1 space-y-4">
     <div class="mb-6 flex space-x-2 border-b px-4 py-2.5">
+      <BackButton />
       <n-avatar
         size="large"
         src="https://i.pravatar.cc/300"
@@ -46,4 +47,5 @@
 
 <script setup lang="ts">
 import { BanOutline } from "@vicons/ionicons5";
+import BackButton from "../common/BackButton.vue";
 </script>

@@ -8,9 +8,12 @@ import IntegrationsView from "@/views/IntegrationsView.vue";
 import AnalyticsView from "@/views/IntegrationsView.vue";
 import ContactsView from "@/views/Profile.vue";
 import PaymentView from "@/views/Profile.vue";
-import type { RouteLocationNormalized } from "vue-router";
+import type { RouteLocationNormalized, RouteRecordRaw } from "vue-router";
+import ChatsList from "@/components/chat_list/ChatsList.vue";
+import ChatDetails from "@/components/chat_details/ChatDetails.vue";
+import ChatWindow from "@/components/chat/ChatWindow.vue";
 
-const routes = [
+const routes: Readonly<RouteRecordRaw[]> = [
   {
     path: "/projects",
     name: "projects",
@@ -30,10 +33,39 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/chat/",
-    name: "chat",
+    path: "/chat",
     component: ChatView,
-    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '', // Default route to chatlist
+        name: 'chat',
+        component: ChatsList,
+      },
+      {
+        path: ":id/messages",
+        name: "messages",
+        component: ChatWindow,
+        props: true,
+        meta: {
+          hideBottomNav: true,
+          hideHeader: true,
+        },
+      },
+      {
+        path: ":id/details",
+        name: "details",
+        component: ChatDetails,
+        props: true,
+        meta: {
+          hideBottomNav: true,
+        },
+      }
+
+    ],
+    meta: {
+      requiresAuth: true,
+      hideHeader: true,
+    },
   },
   {
     path: "/integrations",

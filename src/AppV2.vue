@@ -9,7 +9,7 @@
       <n-dialog-provider>
         <n-notification-provider>
           <n-loading-bar-provider>
-            <div class="flex h-screen divide-y flex-col md:flex-row">
+            <div class="flex h-screen flex-col divide-y md:flex-row">
               <!-- Mobile Header -->
               <AppHeader v-if="!route.meta.hideHeader" />
 

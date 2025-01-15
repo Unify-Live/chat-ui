@@ -1,15 +1,18 @@
 <template>
-  <div class="flex h-full">
-    <div class="flex-[0.2] border-r">
+  <div class="hidden h-full md:flex">
+    <div class="hidden flex-1 overflow-hidden border-r md:block">
       <ChatsList :projectId="projectId" />
     </div>
-    <div class="flex-[0.6] border-r flex flex-col">
-      <ChatHeader />
+    <div class="flex flex-[2.8] flex-col border-r">
       <ChatWindow />
     </div>
-    <div class="flex-[0.2]">
+    <div class="hidden flex-1 md:block">
       <ChatDetails />
     </div>
+  </div>
+
+  <div class="flex h-full md:hidden">
+    <router-view />
   </div>
 </template>
 

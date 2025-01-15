@@ -1,7 +1,9 @@
 <template>
-  <div class="grid h-screen grid-rows-[auto,1fr]">
+  <div class="grid w-full grid-rows-[auto,1fr] md:h-screen">
+    <!-- Search bar -->
     <ChatSearch />
 
+    <!-- Chat list -->
     <div class="overflow-y-auto">
       <n-virtual-list
         :items="chatStore.chatList"
@@ -33,6 +35,9 @@ import { ChatResponse } from "@/client/backend/models/ChatResponse";
 import ChatSearch from "./ChatSearch.vue";
 import { onMounted } from "vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const chatStore = useChatStore();
 const isLoading = ref(true);
@@ -44,10 +49,10 @@ const props = defineProps({
 });
 
 function openChat(chat: ChatResponse) {
-  chatStore.chatOpened = true;
-  chatStore.selectedChat = chat;
-  chatStore.clientTypingText = "";
-  chatStore.fetchMessagesList(chat.uuid);
+  router.push({
+    path: `/chat/${chat.uuid}/messages`,
+  });
+
   console.log("Chat opened", chat);
 }
 

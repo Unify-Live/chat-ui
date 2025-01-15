@@ -1,12 +1,15 @@
 <template>
-  <div class="flex-1 bg-[#E5E7EB]">
-    <MessageList
-      v-if="chatStore.chatOpened"
-      :messages="chatStore.messagesList"
-    />
-    <div v-else>No dialog selected.</div>
+  <div class="flex flex-1 flex-col">
+    <ChatHeader />
+    <div class="flex-1 bg-light-gray">
+      <MessageList
+        v-if="chatStore.chatOpened"
+        :messages="chatStore.messagesList"
+      />
+      <div v-else>No dialog selected.</div>
+    </div>
+    <ChatInput />
   </div>
-  <ChatInput />
 </template>
 
 <script setup>
@@ -15,6 +18,7 @@ import ChatInput from "./ChatInput.vue";
 import ChatMessage from "./ChatMessage.vue";
 import MessageList from "./MessageList.vue";
 import { useChatStore } from "@/stores/chat";
+import ChatHeader from "./ChatHeader.vue";
 
 const newMessage = ref("");
 const messagesRef = ref(null);

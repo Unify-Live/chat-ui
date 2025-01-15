@@ -5,10 +5,11 @@ import {
 } from "@/client/backend";
 import { getBackendUrl } from "@/appConfig";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { ChatResponse } from "@/client/backend/models/ChatResponse";
 import { MessageResponse } from "@/client/backend/models/MessageResponse";
 import { WidgetClientTypingPayload } from "@/client/backend";
+import { useRoute } from "vue-router";
 
 OpenAPI.BASE = getBackendUrl();
 OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
@@ -16,8 +17,14 @@ OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
 export const useChatStore = defineStore("chatStore", () => {
   const chatList = ref<ChatResponse[]>([]);
   const messagesList = ref<MessageResponse[]>([]);
-  const chatOpened = ref(false);
-  const selectedChat = ref<ChatResponse | null>(null);
+  const route = useRoute();
+
+  // const chatOpened = ref(false);
+  // const selectedChat = ref<ChatResponse | null>(null);
+
+  const selectedChat = computed<ChatResponse | null>(() => chatList.value.find((chat) => chat.uuid === route.params.id) || null);
+  const chatOpened = computed(() => !!selectedChat.value);
+
   const clientTyping = ref(false);
   const clientTypingText = ref("");
 
@@ -59,6 +66,13 @@ export const useChatStore = defineStore("chatStore", () => {
       clientTypingText.value = typingEvent.text_typed || "";
     }
   }
+
+  watch(selectedChat, () => {
+    if (selectedChat.value) {
+      clientTypingText.value = "";
+      fetchMessagesList(selectedChat.value.uuid);
+    }
+  })
 
   return {
     chatList,

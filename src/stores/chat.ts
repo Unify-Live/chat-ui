@@ -67,10 +67,10 @@ export const useChatStore = defineStore("chatStore", () => {
     }
   }
 
-  watch(selectedChat, () => {
-    if (selectedChat.value) {
+  watch(selectedChat, (newChat) => {
+    if (newChat) {
       clientTypingText.value = "";
-      fetchMessagesList(selectedChat.value.uuid);
+      fetchMessagesList(newChat.uuid);
     }
   })
 

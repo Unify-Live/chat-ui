@@ -1,6 +1,7 @@
 import {
   ChatCoreService,
   ChatMessagesService,
+  ChatWithParticipants,
   OpenAPI,
 } from "@/client/backend";
 import { getBackendUrl } from "@/appConfig";
@@ -17,6 +18,7 @@ OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
 export const useChatStore = defineStore("chatStore", () => {
   const chatList = ref<ChatResponse[]>([]);
   const messagesList = ref<MessageResponse[]>([]);
+  const chatDetails = ref<ChatWithParticipants | null>(null);
   const route = useRoute();
 
   // const chatOpened = ref(false);
@@ -31,6 +33,7 @@ export const useChatStore = defineStore("chatStore", () => {
   OpenAPI.BASE = getBackendUrl();
   OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
 
+
   function fetchChats(projectUuid: string) {
     try {
       ChatCoreService.getProjectChats(projectUuid).then((chat) => {
@@ -39,6 +42,17 @@ export const useChatStore = defineStore("chatStore", () => {
     } catch (error) {
       console.error("Getting chat list:", error);
     }
+  }
+
+
+
+  function fetchChatDetails(chatUuid: string) {
+    ChatCoreService.getChatDetails(chatUuid).then((chat) => {
+      chatDetails.value = chat;
+    }).catch((error) => {
+      console.error("Getting chat details:", error);
+    })
+
   }
 
   function fetchMessagesList(chatUuid: string) {
@@ -73,13 +87,17 @@ export const useChatStore = defineStore("chatStore", () => {
 
     if (newChat) {
       clientTypingText.value = "";
+
+      fetchChatDetails(newChat.uuid);
       fetchMessagesList(newChat.uuid);
+
     }
   })
 
   return {
     chatList,
     selectedChat,
+    chatDetails,
     clientTyping,
     clientTypingText,
     handleClientTypingText,

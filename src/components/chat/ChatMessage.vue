@@ -1,6 +1,15 @@
 <template>
-  <n-card bordered hoverable size="small">
-    <span>{{ message.content }}</span>
+  <n-card
+    bordered
+    hoverable
+    size="small"
+    :class="{
+      '!ml-auto': message.external_id,
+    }"
+    class="w-2/3"
+  >
+    <p>{{ message.sender_name }}</p>
+    <span>{{ message.content }} </span>
     <p class="message-time">
       {{ message.created_at }}
     </p>

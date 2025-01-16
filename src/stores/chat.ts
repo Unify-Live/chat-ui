@@ -68,6 +68,9 @@ export const useChatStore = defineStore("chatStore", () => {
   }
 
   watch(selectedChat, (newChat) => {
+
+    messagesList.value = [];
+
     if (newChat) {
       clientTypingText.value = "";
       fetchMessagesList(newChat.uuid);

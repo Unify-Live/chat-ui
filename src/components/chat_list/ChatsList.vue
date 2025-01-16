@@ -4,7 +4,7 @@
     <ChatSearch />
 
     <!-- Chat list -->
-    <div class="overflow-y-auto">
+    <div class="grid overflow-y-hidden">
       <n-virtual-list
         :items="chatStore.chatList"
         :item-size="64"

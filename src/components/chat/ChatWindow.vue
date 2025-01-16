@@ -1,7 +1,7 @@
 <template>
-  <div class="odd: flex h-screen flex-1 flex-col overflow-hidden">
+  <div class="flex h-screen flex-1 flex-col overflow-hidden">
     <ChatHeader />
-    <div class="flex-1 overflow-y-hidden bg-light-gray">
+    <div class="flex-1 overflow-y-auto bg-light-gray px-1">
       <MessageList
         v-if="chatStore.chatOpened"
         :messages="chatStore.messagesList"
@@ -29,7 +29,7 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  chatStore.fetchMessagesList(props.selectedChatUuid);
-});
+// onMounted(() => {
+//   chatStore.fetchMessagesList(props.selectedChatUuid);
+// });
 </script>

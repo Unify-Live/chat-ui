@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="flex h-full md:hidden">
+  <div class="flex h-full overflow-hidden md:hidden">
     <router-view />
   </div>
 </template>

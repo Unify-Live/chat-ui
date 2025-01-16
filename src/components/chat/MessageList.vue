@@ -26,16 +26,20 @@ const virtualListInst = ref<VirtualListInst>();
 const chatStore = useChatStore();
 
 function handleScrollToPosition() {
-  virtualListInst.value?.scrollTo({
-    index: chatStore.messagesList.length - 1,
-    debounce: true,
-  });
+  if (chatStore.messagesList.length > 0 && virtualListInst.value)
+    virtualListInst.value?.scrollTo({
+      index: chatStore.messagesList.length - 1,
+    });
 }
 
 watchEffect(() => {
-  chatStore;
+  chatStore.messagesList;
   handleScrollToPosition();
 });
+
+// onUnMounted(() => {
+//   chatStore.messagesList = [];
+// });
 </script>
 
 <style scoped></style>

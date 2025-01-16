@@ -8,9 +8,20 @@
         class="rounded-full"
       />
       <div class="flex-1">
-        <p class="font-medium">{{ chatStore.chatDetails?.title }}</p>
-        <p class="text-gray-500">{{ chatStore.chatDetails?.status }}</p>
+        <p class="line-clamp-1 font-medium">
+          {{ chatStore.chatDetails?.title }}
+        </p>
+        <p class="text-gray-500">{{ chatStore.chatDetails?.description }}</p>
       </div>
+    </div>
+
+    <div class="px-4">
+      <p>
+        Status:
+        <span class="font-bold">
+          {{ chatStore.chatDetails?.status }}
+        </span>
+      </p>
     </div>
 
     <h3 class="text-center font-bold">Учасники чату</h3>
@@ -39,4 +50,6 @@ import BackButton from "../common/BackButton.vue";
 import { useChatStore } from "@/stores/chat";
 
 const chatStore = useChatStore();
+
+alert(JSON.stringify(chatStore.chatDetails));
 </script>

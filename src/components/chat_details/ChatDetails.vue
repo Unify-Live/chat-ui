@@ -51,6 +51,4 @@ import BackButton from "../common/BackButton.vue";
 import { useChatStore } from "@/stores/chat";
 
 const chatStore = useChatStore();
-
-alert(JSON.stringify(chatStore.chatDetails));
 </script>

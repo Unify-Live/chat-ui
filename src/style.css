@@ -6,6 +6,11 @@
 /* Base styles and CSS variables */
 :root {
   /* Layout variables */
+
+  /* Colors */
+  --color-primary: #4461f2;
+  --color-light-gray: #f9fafb;
+  --color-danger: #dc2626;
 }
 
 /* Base element styles */
@@ -28,4 +33,19 @@ body {
 
 .content-container {
   height: var(--content-height);
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.gray.300");
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.gray.400");
 }

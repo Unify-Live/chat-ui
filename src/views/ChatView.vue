@@ -1,13 +1,19 @@
 <template>
-  <n-space>
-    <n-card class="h-screen">
+  <div class="hidden h-full md:flex">
+    <div class="hidden flex-1 overflow-hidden border-r md:block">
       <ChatsList :projectId="projectId" />
-    </n-card>
-    <n-card class="h-screen">
-      <ChatHeader />
+    </div>
+    <div class="flex flex-[2.8] flex-col border-r">
       <ChatWindow />
-    </n-card>
-  </n-space>
+    </div>
+    <div class="hidden flex-1 md:block">
+      <ChatDetails />
+    </div>
+  </div>
+
+  <div class="flex h-full overflow-hidden md:hidden">
+    <router-view />
+  </div>
 </template>
 
 <script setup>
@@ -19,6 +25,7 @@ import { useChatStore } from "@/stores/chat";
 import { useUserStore } from "@/stores/user";
 import { useMessage } from "naive-ui";
 import { useRouter } from "vue-router";
+import ChatDetails from "@/components/chat_details/ChatDetails.vue";
 
 const userStore = useUserStore();
 const message = useMessage();

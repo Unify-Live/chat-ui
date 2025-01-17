@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <MessageList
-      v-if="chatStore.chatOpened"
-      :messages="chatStore.messagesList"
-    />
-    <div v-else>No dialog selected.</div>
+  <div class="flex h-screen flex-1 flex-col overflow-hidden">
+    <ChatHeader />
+    <div class="flex-1 overflow-y-auto bg-light-gray px-1">
+      <MessageList
+        v-if="chatStore.chatOpened"
+        :messages="chatStore.messagesList"
+      />
+      <div v-else>No dialog selected.</div>
+    </div>
+    <ChatInput />
   </div>
-  Typing: {{ chatStore.clientTypingText }}
-  <ChatInput />
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
+<script setup lang="ts">
+import { onMounted } from "vue";
 import ChatInput from "./ChatInput.vue";
-import ChatMessage from "./ChatMessage.vue";
 import MessageList from "./MessageList.vue";
 import { useChatStore } from "@/stores/chat";
+import ChatHeader from "./ChatHeader.vue";
 
-const newMessage = ref("");
-const messagesRef = ref(null);
 const chatStore = useChatStore();
 
 // Props
@@ -29,7 +29,7 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  chatStore.fetchMessagesList(props.selectedChatUuid);
-});
+// onMounted(() => {
+//   chatStore.fetchMessagesList(props.selectedChatUuid);
+// });
 </script>

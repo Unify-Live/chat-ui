@@ -83,6 +83,7 @@ export const useChatStore = defineStore("chatStore", () => {
 
   watch(selectedChat, (newChat) => {
 
+    chatDetails.value = null;
     messagesList.value = [];
 
     if (newChat) {

@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="px-4">
+    <div class="px-4" v-if="chatStore.chatDetails">
       <p>
         Status:
         <span class="font-bold">
@@ -24,7 +24,9 @@
       </p>
     </div>
 
-    <h3 class="text-center font-bold">Учасники чату</h3>
+    <h3 class="text-center font-bold" v-if="chatStore.chatDetails">
+      Учасники чату
+    </h3>
 
     <div
       v-for="participant in chatStore.chatDetails?.participants"
@@ -45,7 +47,6 @@
 </template>
 
 <script setup lang="ts">
-import { BanOutline } from "@vicons/ionicons5";
 import BackButton from "../common/BackButton.vue";
 import { useChatStore } from "@/stores/chat";
 

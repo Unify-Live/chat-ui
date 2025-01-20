@@ -13,36 +13,32 @@
     <p class="message-time">
       {{ message.created_at }}
     </p>
-    <n-image
-      v-if="message.attachments?.[0]"
-      :src="fileUrl"
-      class="mt-2"
-    />
-
-
+    <n-image v-if="message.attachments?.[0]" :src="fileUrl" class="mt-2" />
   </n-card>
 </template>
 
 <script setup lang="ts">
 import { MessageResponse } from "@/client/backend/models/MessageResponse";
 import { useFilesStore } from "@/stores/file";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 const props = defineProps<{
   message: MessageResponse;
 }>();
 
 const fileStore = useFilesStore();
-const fileUrl = ref<string>('');
+const fileUrl = ref<string>("");
 const isLoading = ref(true);
 
 onMounted(async () => {
   if (props.message.attachments?.[0]) {
     try {
-      fileUrl.value = await fileStore.getFile(props.message.attachments[0].uuid);
-      console.log('File loaded:', fileUrl.value);
+      fileUrl.value = await fileStore.getFile(
+        props.message.attachments[0].uuid,
+      );
+      console.log("File loaded:", fileUrl.value);
     } catch (error) {
-      console.error('Failed to load file:', error);
+      console.error("Failed to load file:", error);
     } finally {
       isLoading.value = false;
     }

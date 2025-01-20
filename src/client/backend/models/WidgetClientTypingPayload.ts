@@ -3,21 +3,20 @@
 /* tslint:disable */
 /* eslint-disable */
 export type WidgetClientTypingPayload = {
-    /**
-     * Client UUID
-     */
-    client_uuid: string;
-    /**
-     * Chat UUID
-     */
-    chat_uuid: string;
-    /**
-     * Typing status
-     */
-    is_typing: boolean;
-    /**
-     * Text typed by client
-     */
-    text_typed?: (string | null);
+  /**
+   * Client UUID
+   */
+  client_uuid: string;
+  /**
+   * Chat UUID
+   */
+  chat_uuid: string;
+  /**
+   * Typing status
+   */
+  is_typing: boolean;
+  /**
+   * Text typed by client
+   */
+  text_typed?: string | null;
 };
-

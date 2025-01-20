@@ -6,25 +6,24 @@
  * Schema for project response data.
  */
 export type ProjectResponse = {
-    /**
-     * Unique identifier of the project
-     */
-    uuid: string;
-    /**
-     * Name of the project
-     */
-    name: string;
-    /**
-     * Project description
-     */
-    description?: (string | null);
-    /**
-     * Project creation timestamp
-     */
-    created_at: string;
-    /**
-     * User's role in the project (admin/user/invited)
-     */
-    role_value: string;
+  /**
+   * Unique identifier of the project
+   */
+  uuid: string;
+  /**
+   * Name of the project
+   */
+  name: string;
+  /**
+   * Project description
+   */
+  description?: string | null;
+  /**
+   * Project creation timestamp
+   */
+  created_at: string;
+  /**
+   * User's role in the project (admin/user/invited)
+   */
+  role_value: string;
 };
-

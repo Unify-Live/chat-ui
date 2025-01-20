@@ -3,6 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Body_widget_upload_file = {
-    file: Blob;
+  file: Blob;
 };
-

@@ -1,14 +1,14 @@
 <template>
   <div class="border-t">
     <p class="mt-2">Typing: {{ chatStore.clientTypingText }}</p>
-    <div class="p-4 flex gap-3 items-center">
+    <div class="flex items-center gap-3 p-4">
       <input
         v-model="message_text"
         type="text"
         placeholder="Type a message..."
         class="flex-1 rounded-md border p-2"
       />
-      <button @click="sendMessage" class="bg-primary rounded-md size-7">
+      <button @click="sendMessage" class="size-7 rounded-md bg-primary">
         <n-icon size="">
           <SendLogo />
         </n-icon>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import { MessageCreate, MessageType } from "@/client/backend";
+import { MessageCreate } from "@/client/backend";
 import { useWebSocketStore } from "@/stores/websocket";
 import { useChatStore } from "@/stores/chat";
 import SendLogo from "@/components/logos/SendLogo.vue";
@@ -38,7 +38,6 @@ async function sendMessage() {
   const newMessage: MessageCreate = {
     content: message_text.value,
     chat_uuid: chatStore.selectedChat?.uuid,
-    message_type: MessageType.TEXT,
   };
   if (message_text.value.trim() !== "") {
     webSocketStore.sendMessage(newMessage);

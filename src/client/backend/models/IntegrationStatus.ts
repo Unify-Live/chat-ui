@@ -6,7 +6,7 @@
  * Available integration statuses.
  */
 export enum IntegrationStatus {
-    ACTIVE = 'active',
-    INACTIVE = 'inactive',
-    DELETED = 'deleted',
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  DELETED = "deleted",
 }

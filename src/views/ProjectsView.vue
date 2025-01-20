@@ -39,42 +39,51 @@
     </n-card>
   </n-modal>
 
-  <div class="main" id="main">
+  <div>
     <!-- Show selected project -->
     <n-space justify="space-between" align="center" class="header-space">
       Вибраний проект: {{ userStore.getSelectedProjectUuid() }}
     </n-space>
-
-    <n-space justify="space-between" align="center" class="header-space">
-      <h1>Мої проекти</h1>
-      <n-button @click="openModal" type="primary">
-        <n-icon><Add /></n-icon>
-        Новий проект
-      </n-button>
-    </n-space>
-
-    <n-data-table
-      :columns="columns"
-      :data="projectStore.projectList"
-      :loading="isLoading"
-      :scroll-x="1000"
-      table-layout="fixed"
-      id="ProjectsTable"
-      class="projects-table"
-    />
   </div>
+  <n-space>
+    <n-card title="New Project" size="small" class="project-card" hoverable>
+      <n-button type="primary" @click="openModal">
+        <n-icon><Add /></n-icon>
+        New Project
+      </n-button>
+    </n-card>
+    <n-card
+      v-for="project in projectStore.projectList"
+      :key="project.uuid"
+      :title="project.name"
+      size="small"
+      class="project-card"
+      hoverable
+    >
+      <n-space vertical>
+        <p>Description: {{ project.description }}</p>
+        <p>You role: {{ project.role_value }}</p>
+
+        <n-button
+          :disabled="userStore.getSelectedProjectUuid() == project.uuid"
+          type="primary"
+          @click="userStore.setSelectedProjectUuid(project.uuid)"
+        >
+          <n-icon><CheckmarkOutline /></n-icon>
+          Select
+        </n-button>
+      </n-space>
+    </n-card>
+  </n-space>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, h, Ref } from "vue";
+import { onMounted, ref, Ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useProjectsStore } from "@/stores/project";
-import { ProjectResponse } from "../client/backend/models/ProjectResponse";
-import { DataTableColumns } from "naive-ui";
 import { useMessage } from "naive-ui";
-import { Add, Checkmark } from "@vicons/ionicons5";
-import { RouterLink } from "vue-router";
-import { NButton, NIcon, NTag } from "naive-ui";
+import { Add, CheckmarkOutline } from "@vicons/ionicons5";
+import { NButton, NIcon } from "naive-ui";
 
 const projectStore = useProjectsStore();
 const userStore = useUserStore();
@@ -101,74 +110,6 @@ function handleCreateProject() {
 onMounted(() => {
   projectStore.fetchMyProjects();
 });
-
-const columns: DataTableColumns<ProjectResponse> = [
-  {
-    key: "name",
-    title: "Ім'я",
-    align: "center",
-    sorter: "default",
-    render: (row: ProjectResponse) => {
-      return h(
-        RouterLink,
-        {
-          to: `/project/${row.uuid}`,
-          title: "Go Project details",
-          id: "ProjectId",
-          style: {
-            textDecoration: "none",
-            color: "inherit",
-          },
-        },
-        () => row.name,
-      );
-    },
-  },
-  {
-    key: "uuid",
-    title: "UUID",
-    align: "center",
-    sorter: "default",
-    render: (row: ProjectResponse) => {
-      return row.uuid;
-    },
-  },
-
-  // Action what is a button to select active project and put uuid into user store
-  {
-    key: "action",
-    title: "Виберіть проект",
-    align: "center",
-    render: (row: ProjectResponse) => {
-      return h(
-        NButton,
-        {
-          text: false,
-          quaternary: true,
-          round: true,
-          color: "green",
-          focusable: false,
-          disabled: row.uuid === userStore.getSelectedProjectUuid(),
-          onClick: () => {
-            userStore.setSelectedProjectUuid(row.uuid);
-          },
-        },
-        {
-          default: () =>
-            h(
-              NIcon,
-              {
-                size: 25,
-              },
-              {
-                default: () => h(Checkmark),
-              },
-            ),
-        },
-      );
-    },
-  },
-];
 
 onMounted(async () => {
   isLoading.value = true;

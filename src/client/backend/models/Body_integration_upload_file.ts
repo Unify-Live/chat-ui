@@ -3,6 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Body_integration_upload_file = {
-    file: Blob;
+  file: Blob;
 };
-

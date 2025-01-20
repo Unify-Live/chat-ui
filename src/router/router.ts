@@ -37,8 +37,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
     component: ChatView,
     children: [
       {
-        path: '', // Default route to chatlist
-        name: 'chat',
+        path: "", // Default route to chatlist
+        name: "chat",
         component: ChatsList,
       },
       {
@@ -59,8 +59,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         meta: {
           hideBottomNav: true,
         },
-      }
-
+      },
     ],
     meta: {
       requiresAuth: true,

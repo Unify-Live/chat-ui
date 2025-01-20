@@ -6,9 +6,8 @@
  * Schema for creating a new project invite.
  */
 export type ProjectInviteCreate = {
-    /**
-     * Email of the user to invite
-     */
-    email: string;
+  /**
+   * Email of the user to invite
+   */
+  email: string;
 };
-

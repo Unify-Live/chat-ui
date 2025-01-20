@@ -6,7 +6,7 @@
  * Available chat statuses.
  */
 export enum ChatStatus {
-  ACTIVE = "active",
-  CLOSED = "closed",
-  ARCHIVED = "archived",
+    ACTIVE = 'active',
+    CLOSED = 'closed',
+    ARCHIVED = 'archived',
 }

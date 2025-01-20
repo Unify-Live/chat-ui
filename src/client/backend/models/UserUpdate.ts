@@ -6,8 +6,9 @@
  * Schema for updating user profile.
  */
 export type UserUpdate = {
-  /**
-   * User's mobile phone number
-   */
-  mobile_number?: string | null;
+    /**
+     * User's mobile phone number
+     */
+    mobile_number?: (string | null);
 };
+

@@ -3,6 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum ManagerWsEventTypes {
-  NEW_MESSAGE_FROM_MANGER = "new_message_from_manger",
-  MANAGER_TYPING = "manager_typing",
+    NEW_MESSAGE_FROM_MANGER = 'new_message_from_manger',
+    MANAGER_TYPING = 'manager_typing',
 }

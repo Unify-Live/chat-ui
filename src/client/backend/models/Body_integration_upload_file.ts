@@ -2,10 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type ApiKeysRequest = {
-    /**
-     * Api key description
-     */
-    description: string;
+export type Body_integration_upload_file = {
+    file: Blob;
 };
 

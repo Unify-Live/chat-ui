@@ -3,8 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type CodeRequest = {
-  /**
-   * Auth code from frontend application
-   */
-  code: string;
+    /**
+     * Auth code from frontend application
+     */
+    code: string;
 };
+

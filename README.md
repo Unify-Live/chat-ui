@@ -7,4 +7,4 @@ docker push prudnikov21/chat-ui:latest
 
 docker pull prudnikov21/chat-ui:latest
 
-openapi -i http://localhost:5000/api/openapi.json -o src/client/backend.ts
+openapi -i https://dev-backend-api.unify-live.com/api/openapi.json -o src/client/backend.ts

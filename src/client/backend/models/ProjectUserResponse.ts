@@ -17,7 +17,7 @@ export type ProjectUserResponse = {
   /**
    * User's role in the project (admin or user)
    */
-  role: string;
+  role_value: string;
   /**
    * When user joined the project
    */

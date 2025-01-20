@@ -22,4 +22,8 @@ export type ProjectResponse = {
    * Project creation timestamp
    */
   created_at: string;
+  /**
+   * User's role in the project (admin/user/invited)
+   */
+  role_value: string;
 };

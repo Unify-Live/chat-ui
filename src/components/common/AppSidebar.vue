@@ -79,6 +79,7 @@ import NotificationsLogo from "@/components/logos/NotificationsLogo.vue";
 import AnalyticsLogo from "@/components/logos/AnalyticsLogo.vue";
 import ChatsLogo from "@/components/logos/ChatsLogo.vue";
 import ContactsLogo from "@/components/logos/ContactsLogo.vue";
+import { PeopleCircleOutline } from "@vicons/ionicons5";
 import IntegrationsLogo from "@/components/logos/IntegrationsLogo.vue";
 import HomeLogo from "@/components/logos/HomeLogo.vue";
 import OpenMoreOptionsLogo from "@/components/logos/OpenMoreOptionsLogo.vue";
@@ -88,11 +89,12 @@ import UnifyLogo from "@/components/logos/UnifyLogoV2.vue";
 import ThemeChanger from "./ThemeChanger.vue";
 
 const navItems = [
-  { route: "/projects", icon: HomeLogo, label: "Проекти" },
+  { route: "/project-details", icon: HomeLogo, label: "Деталі проекту" },
   { route: `/chat`, icon: ChatsLogo, label: "Чати" },
-  { route: `/project-details`, icon: ProjectLogo, label: "Деталі проекту" },
+  { route: `/projects`, icon: ProjectLogo, label: "Проекти" },
   { route: "/integrations", icon: IntegrationsLogo, label: "Інтеграції" },
   { route: "/contacts", icon: ContactsLogo, label: "Контакти" },
+  { route: "/team", icon: PeopleCircleOutline, label: "Команда" },
   { route: "/analytics", icon: AnalyticsLogo, label: "Аналітика" },
   { route: "/payment", icon: PaymentLogo, label: "Оплата" },
 ];

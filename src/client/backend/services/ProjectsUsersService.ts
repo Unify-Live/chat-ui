@@ -9,34 +9,6 @@ import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
 export class ProjectsUsersService {
   /**
-   * Add user to project
-   * @param projectUuid
-   * @param userEmail
-   * @param role
-   * @returns ProjectUserResponse Successful Response
-   * @throws ApiError
-   */
-  public static addUserToProject(
-    projectUuid: string,
-    userEmail: string,
-    role: string,
-  ): CancelablePromise<ProjectUserResponse> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/projects/{project_uuid}/users",
-      path: {
-        project_uuid: projectUuid,
-      },
-      query: {
-        user_email: userEmail,
-        role: role,
-      },
-      errors: {
-        422: `Validation Error`,
-      },
-    });
-  }
-  /**
    * Get project users
    * Retrieves a paginated list of project users with optional search and filtering.
    * @param projectUuid

@@ -2,8 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { AttachmentCreate } from "../models/AttachmentCreate";
-import type { AttachmentResponse } from "../models/AttachmentResponse";
 import type { MessageCreate } from "../models/MessageCreate";
 import type { MessageResponse } from "../models/MessageResponse";
 import type { MessageStatus } from "../models/MessageStatus";
@@ -147,124 +145,6 @@ export class ChatMessagesService {
       },
       query: {
         participant_uuid: participantUuid,
-      },
-      errors: {
-        401: `Authentication required`,
-        403: `Insufficient permissions`,
-        404: `Message not found`,
-        422: `Validation Error`,
-      },
-    });
-  }
-  /**
-   * Add attachment
-   * Add file attachment to message
-   * @param messageUuid
-   * @param fileType Type of file
-   * @param fileUrl URL to file
-   * @param fileName Original filename
-   * @returns AttachmentCreate Successful Response
-   * @throws ApiError
-   */
-  public static addMessageAttachment(
-    messageUuid: string,
-    fileType: string,
-    fileUrl: string,
-    fileName?: string | null,
-  ): CancelablePromise<AttachmentCreate> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/chat/messages/{message_uuid}/attachments",
-      path: {
-        message_uuid: messageUuid,
-      },
-      query: {
-        file_type: fileType,
-        file_url: fileUrl,
-        file_name: fileName,
-      },
-      errors: {
-        401: `Authentication required`,
-        403: `Insufficient permissions`,
-        404: `Message not found`,
-        422: `Validation Error`,
-      },
-    });
-  }
-  /**
-   * Get attachments
-   * Get all attachments for message
-   * @param messageUuid
-   * @returns AttachmentResponse Successful Response
-   * @throws ApiError
-   */
-  public static getMessageAttachments(
-    messageUuid: string,
-  ): CancelablePromise<Array<AttachmentResponse>> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/chat/messages/{message_uuid}/attachments",
-      path: {
-        message_uuid: messageUuid,
-      },
-      errors: {
-        401: `Authentication required`,
-        403: `Insufficient permissions`,
-        404: `Message not found`,
-        422: `Validation Error`,
-      },
-    });
-  }
-  /**
-   * Delete attachment
-   * Delete file attachment
-   * @param attachmentUuid
-   * @returns void
-   * @throws ApiError
-   */
-  public static deleteMessageAttachment(
-    attachmentUuid: string,
-  ): CancelablePromise<void> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/chat/messages/attachments/{attachment_uuid}",
-      path: {
-        attachment_uuid: attachmentUuid,
-      },
-      errors: {
-        401: `Authentication required`,
-        403: `Insufficient permissions`,
-        404: `Message not found`,
-        422: `Validation Error`,
-      },
-    });
-  }
-  /**
-   * Get chat attachments
-   * Get all attachments in chat with pagination
-   * @param chatUuid
-   * @param fileType Filter by file type
-   * @param limit
-   * @param offset
-   * @returns any Successful Response
-   * @throws ApiError
-   */
-  public static getAllChatAttachments(
-    chatUuid: string,
-    fileType?: string | null,
-    limit: number = 50,
-    offset?: number,
-  ): CancelablePromise<any> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/chat/messages/chat/{chat_uuid}/attachments",
-      path: {
-        chat_uuid: chatUuid,
-      },
-      query: {
-        file_type: fileType,
-        limit: limit,
-        offset: offset,
       },
       errors: {
         401: `Authentication required`,

@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center justify-between px-4 py-3 md:hidden bg-white">
+  <div class="flex items-center justify-between bg-white px-4 py-3 md:hidden">
     <UnifyLogo />
 
-    <div class="flex gap-6 items-center" v-if="!showCloseButton">
+    <div class="flex items-center gap-6" v-if="!showCloseButton">
       <button @click="getNotifications">
         <n-badge :value="2" :offset="[-2, -2]">
           <n-icon size="20">
@@ -20,7 +20,7 @@
           :class="isActive ? 'text-primary' : 'text-gray-600'"
         >
           <img
-            class="bg-black h-8 rounded-full aspect-square"
+            class="aspect-square h-8 rounded-full bg-black"
             src="https://i.pravatar.cc/300"
             preview-disabled
           />

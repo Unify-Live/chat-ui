@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { MessageStatus } from "./MessageStatus";
-import type { MessageType } from "./MessageType";
 /**
  * Schema for message response data.
  */
@@ -24,10 +23,6 @@ export type MessageResponse = {
    * Message content
    */
   content: string;
-  /**
-   * Message type
-   */
-  message_type: MessageType;
   /**
    * Message status
    */

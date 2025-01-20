@@ -2,10 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-/**
- * Message types.
- */
-export enum MessageType {
-  TEXT = "text",
-  FILE = "file",
-}
+export type Body_widget_upload_file = {
+  file: Blob;
+};

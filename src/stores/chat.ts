@@ -24,7 +24,9 @@ export const useChatStore = defineStore("chatStore", () => {
   // const chatOpened = ref(false);
   // const selectedChat = ref<ChatResponse | null>(null);
 
-  const selectedChat = computed<ChatResponse | null>(() => chatList.value.find((chat) => chat.uuid === route.params.id) || null);
+  const selectedChat = computed<ChatResponse | null>(
+    () => chatList.value.find((chat) => chat.uuid === route.params.id) || null,
+  );
   const chatOpened = computed(() => !!selectedChat.value);
 
   const clientTyping = ref(false);
@@ -32,7 +34,6 @@ export const useChatStore = defineStore("chatStore", () => {
 
   OpenAPI.BASE = getBackendUrl();
   OpenAPI.TOKEN = localStorage.getItem("userToken") || "";
-
 
   function fetchChats(projectUuid: string) {
     try {
@@ -44,15 +45,14 @@ export const useChatStore = defineStore("chatStore", () => {
     }
   }
 
-
-
   function fetchChatDetails(chatUuid: string) {
-    ChatCoreService.getChatDetails(chatUuid).then((chat) => {
-      chatDetails.value = chat;
-    }).catch((error) => {
-      console.error("Getting chat details:", error);
-    })
-
+    ChatCoreService.getChatDetails(chatUuid)
+      .then((chat) => {
+        chatDetails.value = chat;
+      })
+      .catch((error) => {
+        console.error("Getting chat details:", error);
+      });
   }
 
   function fetchMessagesList(chatUuid: string) {
@@ -82,7 +82,6 @@ export const useChatStore = defineStore("chatStore", () => {
   }
 
   watch(selectedChat, (newChat) => {
-
     chatDetails.value = null;
     messagesList.value = [];
 
@@ -91,9 +90,8 @@ export const useChatStore = defineStore("chatStore", () => {
 
       fetchChatDetails(newChat.uuid);
       fetchMessagesList(newChat.uuid);
-
     }
-  })
+  });
 
   return {
     chatList,

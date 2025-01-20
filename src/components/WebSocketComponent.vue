@@ -5,7 +5,7 @@
     </div>
 
     <!-- Messages List -->
-    <div class="mb-4 h-64 overflow-y-auto border p-2 rounded">
+    <div class="mb-4 h-64 overflow-y-auto rounded border p-2">
       <div v-for="(message, index) in messages" :key="index" class="mb-2">
         {{ message }}
       </div>
@@ -17,12 +17,12 @@
         v-model="newMessage"
         @keyup.enter="sendMessage"
         type="text"
-        class="border p-2 rounded flex-grow"
+        class="flex-grow rounded border p-2"
         placeholder="Type a message..."
       />
       <button
         @click="sendMessage"
-        class="px-4 py-2 bg-blue-500 text-white rounded"
+        class="rounded bg-blue-500 px-4 py-2 text-white"
         :disabled="!isConnected"
       >
         Send

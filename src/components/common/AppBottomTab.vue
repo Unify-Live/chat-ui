@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-center gap-7 justify-around p-3 overflow-y-auto md:hidden"
+    class="flex items-center justify-around gap-7 overflow-y-auto p-3 md:hidden"
   >
     <router-link
       :to="item.route"
@@ -32,7 +32,6 @@
         :class="{ '*:stroke-primary': isMenuOpen }"
         class="size-5"
       />
-      Меню
     </button>
 
     <MoreMenuNav :isMenuOpen="isMenuOpen" :closeMenu="closeMenu" />
@@ -48,16 +47,9 @@ import { ref } from "vue";
 import MoreMenuNav from "../more_nav/MoreMenuNav.vue";
 
 const navItems = [
-  { route: "/projects", icon: HomeLogo, label: "Головна" },
-
-  { route: `/chat`, icon: ChatsLogo, label: "Чат" },
-
-  { route: "/project-details", icon: ProjectLogo, label: "Проєкти" },
-  // {
-  //   route: "/more",
-  //   icon: OpenMoreOptionsLogo,
-  //   label: "Меню",
-  // },
+  { route: "/project-details", icon: HomeLogo, label: "" },
+  { route: `/chat`, icon: ChatsLogo, label: "" },
+  { route: "/projects", icon: ProjectLogo, label: "" },
 ];
 
 const isMenuOpen = ref(false);

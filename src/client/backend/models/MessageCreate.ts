@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MessageType } from "./MessageType";
 /**
  * Schema for creating a new message.
  */
@@ -15,10 +14,6 @@ export type MessageCreate = {
    * Message content
    */
   content: string;
-  /**
-   * Type of message
-   */
-  message_type?: MessageType;
   /**
    * External system message ID
    */

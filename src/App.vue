@@ -16,16 +16,16 @@
                   bordered
                   :collapsed="false"
                   :width="80"
-                  class="fixed left-0 top-0 h-full hidden md:block tall:hidden bg-white border-r"
+                  class="fixed left-0 top-0 hidden h-full border-r bg-white md:block tall:hidden"
                 >
-                  <nav class="h-full flex flex-col">
+                  <nav class="flex h-full flex-col">
                     <!-- Logo section -->
-                    <div class="p-3.5 border-b">
+                    <div class="border-b p-3.5">
                       <UnifyLogo class="w-13 h-14" />
                     </div>
 
                     <!-- Navigation buttons -->
-                    <div class="flex-1 px-4 pt-6 flex flex-col">
+                    <div class="flex flex-1 flex-col px-4 pt-6">
                       <!-- Top buttons section -->
                       <div class="flex flex-col gap-8">
                         <n-tooltip
@@ -43,7 +43,7 @@
                               <button
                                 :href="href"
                                 @click="navigate"
-                                class="w-full h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors"
+                                class="flex h-12 w-full items-center justify-center rounded-xl transition-colors hover:bg-gray-100"
                                 :class="
                                   isActive ? 'text-primary' : 'text-gray-600'
                                 "
@@ -62,11 +62,11 @@
                     </div>
 
                     <!-- Bottom section -->
-                    <div class="border-t p-4 flex flex-col gap-6">
+                    <div class="flex flex-col gap-6 border-t p-4">
                       <n-tooltip trigger="hover" placement="right">
                         <template #trigger>
                           <div
-                            class="h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors"
+                            class="flex h-12 items-center justify-center rounded-xl transition-colors hover:bg-gray-100"
                             @click="getNotifications"
                           >
                             <n-badge :value="2" :offset="[6, -8]">
@@ -89,7 +89,7 @@
                             <div
                               :href="href"
                               @click="navigate"
-                              class="h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors"
+                              class="flex h-12 items-center justify-center rounded-xl transition-colors hover:bg-gray-100"
                               :class="
                                 isActive ? 'text-primary' : 'text-gray-600'
                               "
@@ -116,7 +116,7 @@
 
                   <!-- Mobile nav -->
                   <div
-                    class="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden tall:block"
+                    class="fixed bottom-0 left-0 right-0 border-t bg-white md:hidden tall:block"
                   >
                     <nav class="flex justify-around p-2">
                       <router-link

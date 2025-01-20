@@ -22,4 +22,8 @@ export type MessageCreate = {
    * UUID of message being replied to
    */
   reply_to_uuid?: string | null;
+  /**
+   * List of attachment UUIDs
+   */
+  attachments_uuids?: Array<string>;
 };

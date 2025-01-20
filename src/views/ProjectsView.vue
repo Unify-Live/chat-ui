@@ -29,10 +29,10 @@
         </n-form-item>
         <div style="display: flex; justify-content: flex-end">
           <n-button type="error" class="mr-4" @click="cancelProjectCreation"
-            >Cancel</n-button
+            >Скасувати</n-button
           >
           <n-button type="primary" @click="handleCreateProject">
-            Save
+            зберегти
           </n-button>
         </div>
       </n-form>
@@ -49,7 +49,7 @@
     <n-card title="New Project" size="small" class="project-card" hoverable>
       <n-button type="primary" @click="openModal">
         <n-icon><Add /></n-icon>
-        New Project
+        Новий проект
       </n-button>
     </n-card>
     <n-card
@@ -61,17 +61,30 @@
       hoverable
     >
       <n-space vertical>
-        <p>Description: {{ project.description }}</p>
-        <p>You role: {{ project.role_value }}</p>
+        <p>опис: {{ project.description }}</p>
+        <p>Ваша роль: {{ project.role_value }}</p>
 
-        <n-button
-          :disabled="userStore.getSelectedProjectUuid() == project.uuid"
-          type="primary"
-          @click="userStore.setSelectedProjectUuid(project.uuid)"
+        <n-space
+          v-if="project.role_value == 'admin' || project.role_value == 'user'"
         >
-          <n-icon><CheckmarkOutline /></n-icon>
-          Select
-        </n-button>
+          <n-button
+            :disabled="userStore.getSelectedProjectUuid() == project.uuid"
+            type="primary"
+            @click="userStore.setSelectedProjectUuid(project.uuid)"
+          >
+            <n-icon><CheckmarkOutline /></n-icon>
+            Виберіть
+          </n-button>
+        </n-space>
+        <n-space v-if="project.role_value == 'invited'">
+          <n-button
+            type="error"
+            @click="handleAcceptProjectInvite(project.uuid)"
+            :loading="acceptingProjectInvite"
+          >
+            Прийняти запрошення
+          </n-button>
+        </n-space>
       </n-space>
     </n-card>
   </n-space>
@@ -86,6 +99,7 @@ import { Add, CheckmarkOutline } from "@vicons/ionicons5";
 import { NButton, NIcon } from "naive-ui";
 
 const projectStore = useProjectsStore();
+const acceptingProjectInvite = ref(false);
 const userStore = useUserStore();
 const isLoading = ref(false);
 const message = useMessage();
@@ -106,14 +120,16 @@ function handleCreateProject() {
   message.success("Project created successfully");
 }
 
+function handleAcceptProjectInvite(projectUuid: string) {
+  acceptingProjectInvite.value = true;
+  projectStore.acceptProjectInvite(projectUuid);
+  acceptingProjectInvite.value = false;
+}
+
 // Setup mobile detection
 onMounted(() => {
-  projectStore.fetchMyProjects();
-});
-
-onMounted(async () => {
   isLoading.value = true;
-  // Add your data fetching logic here
+  projectStore.fetchMyProjects();
   isLoading.value = false;
 });
 </script>

@@ -12,6 +12,7 @@ import type { RouteLocationNormalized, RouteRecordRaw } from "vue-router";
 import ChatsList from "@/components/chat_list/ChatsList.vue";
 import ChatDetails from "@/components/chat_details/ChatDetails.vue";
 import ChatWindow from "@/components/chat/ChatWindow.vue";
+import TeamView from "@/views/TeamView.vue";
 
 const routes: Readonly<RouteRecordRaw[]> = [
   {
@@ -82,6 +83,12 @@ const routes: Readonly<RouteRecordRaw[]> = [
     path: "/contacts",
     name: "contacts",
     component: ContactsView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/team",
+    name: "team",
+    component: TeamView,
     meta: { requiresAuth: true },
   },
   {

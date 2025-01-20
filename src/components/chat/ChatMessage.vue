@@ -13,57 +13,35 @@
     <p class="message-time">
       {{ message.created_at }}
     </p>
+    <n-image v-if="message.attachments?.[0]" :src="fileUrl" class="mt-2" />
   </n-card>
 </template>
 
 <script setup lang="ts">
 import { MessageResponse } from "@/client/backend/models/MessageResponse";
-import { useThemeVars } from "naive-ui";
+import { useFilesStore } from "@/stores/file";
+import { ref, onMounted } from "vue";
 
-defineProps<{
+const props = defineProps<{
   message: MessageResponse;
 }>();
 
-const themeVars = useThemeVars();
+const fileStore = useFilesStore();
+const fileUrl = ref<string>("");
+const isLoading = ref(true);
+
+onMounted(async () => {
+  if (props.message.attachments?.[0]) {
+    try {
+      fileUrl.value = await fileStore.getFile(
+        props.message.attachments[0].uuid,
+      );
+      console.log("File loaded:", fileUrl.value);
+    } catch (error) {
+      console.error("Failed to load file:", error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+});
 </script>
-
-<style scoped>
-.message-card {
-  margin: 8px 0;
-  border-radius: 12px;
-}
-
-.message-time {
-  font-size: 0.8em;
-  margin-top: 4px;
-  opacity: 0.7;
-}
-
-.light-theme.manager {
-  background-color: v-bind("themeVars.cardColor");
-  color: v-bind("themeVars.textColor2");
-  align-self: flex-end;
-  text-align: right;
-}
-
-.light-theme.client {
-  background-color: v-bind("themeVars.primaryColor");
-  color: v-bind("themeVars.textColorInverted");
-  align-self: flex-start;
-  text-align: left;
-}
-
-.dark-theme.manager {
-  background-color: v-bind("themeVars.cardColor");
-  color: v-bind("themeVars.textColor2");
-  align-self: flex-end;
-  text-align: right;
-}
-
-.dark-theme.client {
-  background-color: v-bind("themeVars.primaryColorSuppl");
-  color: v-bind("themeVars.textColorInverted");
-  align-self: flex-start;
-  text-align: left;
-}
-</style>

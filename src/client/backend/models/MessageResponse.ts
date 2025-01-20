@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { FileData } from "./FileData";
 import type { MessageStatus } from "./MessageStatus";
 /**
  * Schema for message response data.
@@ -43,6 +44,10 @@ export type MessageResponse = {
    * Last update timestamp
    */
   updated_at: string;
+  /**
+   * List of message attachments
+   */
+  attachments?: Array<FileData>;
   /**
    * Name of message sender
    */

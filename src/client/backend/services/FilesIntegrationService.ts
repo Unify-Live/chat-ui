@@ -10,19 +10,22 @@ import { request as __request } from "../core/request";
 export class FilesIntegrationService {
   /**
    * Integration Upload File
+   * @param integrationUuid
    * @param clientUuid
    * @param formData
    * @returns FileData Successful Response
    * @throws ApiError
    */
   public static integrationUploadFile(
+    integrationUuid: string,
     clientUuid: string,
     formData: Body_integration_upload_file,
   ): CancelablePromise<FileData> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/files/integration/upload/{client_uuid}",
+      url: "/files/integration/{integration_uuid}/upload/{client_uuid}",
       path: {
+        integration_uuid: integrationUuid,
         client_uuid: clientUuid,
       },
       formData: formData,
